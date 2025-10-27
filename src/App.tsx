@@ -3,7 +3,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs';
 import { Button } from './components/ui/button';
 import { ImageWithFallback } from './components/figma/ImageWithFallback';
 import { BookOpen, Users, FileText, Calendar, Mail, Home, Languages } from 'lucide-react';
-import ausLogo from 'figma:asset/d06d6acabec83a5b5d33976ef83c79eba8569e6a.png';
+import ausLogo from './assets/d06d6acabec83a5b5d33976ef83c79eba8569e6a.png';
+import mcgillBuilding from './assets/1729019422528.jpeg';
 import { translations, Language } from './lib/translations';
 import { HomePage } from './components/pages/HomePage';
 import { AboutPage } from './components/pages/AboutPage';
@@ -11,6 +12,7 @@ import { InvolvementPage } from './components/pages/InvolvementPage';
 import { ResourcesPage } from './components/pages/ResourcesPage';
 import { AcademicsPage } from './components/pages/AcademicsPage';
 import { ContactPage } from './components/pages/ContactPage';
+import React from 'react';
 
 export default function App() {
   const [language, setLanguage] = useState<Language>('en');
@@ -49,7 +51,7 @@ export default function App() {
       {/* Hero Section */}
       <div className="relative h-64 md:h-80 overflow-hidden">
         <ImageWithFallback
-          src="https://images.unsplash.com/photo-1693011142814-aa33d7d1535c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1bml2ZXJzaXR5JTIwY2FtcHVzJTIwc3R1ZGVudHN8ZW58MXx8fHwxNzYxMzc2NDA0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+          src={mcgillBuilding}
           alt="McGill Campus"
           className="w-full h-full object-cover"
         />
