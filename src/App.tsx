@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs';
 import { Button } from './components/ui/button';
 import { ImageWithFallback } from './components/figma/ImageWithFallback';
-import { BookOpen, Users, FileText, Calendar, Mail, Home, Languages } from 'lucide-react';
+import { BookOpen, Users, FileText, Calendar, Mail, Home, Languages, Gavel } from 'lucide-react';
 import ausLogo from 'figma:asset/d06d6acabec83a5b5d33976ef83c79eba8569e6a.png';
 import { translations, Language } from './lib/translations';
 import { HomePage } from './components/pages/HomePage';
@@ -11,6 +11,7 @@ import { InvolvementPage } from './components/pages/InvolvementPage';
 import { ResourcesPage } from './components/pages/ResourcesPage';
 import { AcademicsPage } from './components/pages/AcademicsPage';
 import { ContactPage } from './components/pages/ContactPage';
+import { GovernancePage } from './components/pages/GovernancePage';
 
 export default function App() {
   const [language, setLanguage] = useState<Language>('en');
@@ -64,7 +65,7 @@ export default function App() {
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8 md:py-12">
         <Tabs defaultValue="home" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 gap-2 h-auto bg-white shadow-md p-2 mb-8">
+          <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 gap-1 h-auto bg-white shadow-md p-2 mb-8">
             <TabsTrigger value="home" className="flex items-center gap-2 py-3">
               <Home className="w-4 h-4" />
               <span>{t.navHome}</span>
@@ -72,6 +73,10 @@ export default function App() {
             <TabsTrigger value="about" className="flex items-center gap-2 py-3">
               <Users className="w-4 h-4" />
               <span>{t.navAbout}</span>
+            </TabsTrigger>
+            <TabsTrigger value="governance" className="flex items-center gap-2 py-3">
+              <Gavel className="w-4 h-4" />
+              <span>{t.navGovernance}</span>
             </TabsTrigger>
             <TabsTrigger value="involved" className="flex items-center gap-2 py-3">
               <Calendar className="w-4 h-4" />
@@ -97,6 +102,10 @@ export default function App() {
 
           <TabsContent value="about">
             <AboutPage language={language} />
+          </TabsContent>
+
+          <TabsContent value="governance">
+            <GovernancePage language={language} />
           </TabsContent>
 
           <TabsContent value="involved">
