@@ -1,14 +1,11 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import { FileText, BookOpen, Users, GraduationCap, Calendar } from 'lucide-react';
-import { translations, Language } from '../../lib/translations';
-import React from 'react';
+import { translations } from '../../lib/translations';
+import { useApp } from '../../lib/AppContext';
 
-interface ResourcesPageProps {
-  language: Language;
-}
-
-export function ResourcesPage({ language }: ResourcesPageProps) {
+export function ResourcesPage() {
+  const { language } = useApp();
   const t = translations[language];
 
   return (
