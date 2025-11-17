@@ -129,7 +129,7 @@ export const translations = {
     govComRole: "Support the AUS Executive and Legislative Councils through focused mandates.",
     govComPoint1: "Examples: Equity Committee; AUS FMC; EPIC; FEARC",
     govExecHeading: "Executive Roles — The Essentials",
-    govExecIntro: "General role descriptions and quick tips to set expectations. Exit-report templates coming soon.",
+    govExecIntro: "",
     govRolePresidentTitle: "President",
     govRolePresidentDesc: "Overall leadership, governance stewardship, strategy, and external representation.",
     govRoleVpAcademicTitle: "VP Academic",

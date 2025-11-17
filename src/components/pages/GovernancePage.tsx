@@ -186,20 +186,10 @@ export function GovernancePage({ language }: GovernancePageProps) {
                                 desc={t.govRoleVpInternalDesc}
                             />
 
-                            {/* VP Comms with quote */}
-                            <Card className="border-gray-200">
-                                <CardHeader className="pb-2">
-                                    <div className="flex items-center gap-2">
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-red-50">
-                <Users className="w-4 h-4 text-red-700" />
-              </span>
-                                        <CardTitle className="text-base">{t.govRoleVpCommsTitle}</CardTitle>
-                                    </div>
-                                    <CardDescription className="whitespace-normal break-words">
-                                        {t.govRoleVpCommsDesc}
-                                    </CardDescription>
-                                </CardHeader>
-                            </Card>
+                            <RoleItem
+                                title={t.govRoleVpCommsTitle}
+                                desc={t.govRoleVpCommsDesc}
+                            />
                         </div>
                     </CardContent>
                 </Card>
@@ -248,18 +238,20 @@ function OutlineLink({ title, desc }: { title: string; desc: string }) {
 
 function RoleItem({ title, desc }: { title: string; desc: string }) {
     return (
-        <Card className="border-gray-200">
-            <CardHeader className="pb-2">
+        <Card className="border-gray-200 h-full">
+            <CardHeader className="pb-1">
                 <div className="flex items-center gap-2">
-          <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-red-50">
-            <Users className="w-4 h-4 text-red-700" />
-          </span>
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-red-50">
+                        <Users className="w-4 h-4 text-red-700" />
+                    </span>
                     <CardTitle className="text-base">{title}</CardTitle>
                 </div>
-                <CardDescription className="whitespace-normal break-words leading-relaxed">
-                    {desc}
-                </CardDescription>
             </CardHeader>
+                <CardContent className="pt-0 pb-4">
+                    <p className="text-sm text-gray-700 whitespace-normal break-words leading-relaxed">
+                    {desc}
+                    </p>
+                </CardContent>
         </Card>
     );
 }
