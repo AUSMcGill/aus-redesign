@@ -1,13 +1,10 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
-import { translations, Language } from '../../lib/translations';
-import React from 'react';
+import { translations } from '../../lib/translations';
+import { useApp } from '../../lib/AppContext';
 
-interface AcademicsPageProps {
-  language: Language;
-}
-
-export function AcademicsPage({ language }: AcademicsPageProps) {
+export function AcademicsPage() {
+  const { language } = useApp();
   const t = translations[language];
 
   return (
@@ -30,17 +27,17 @@ export function AcademicsPage({ language }: AcademicsPageProps) {
             <div>
               <h3 className="mb-3">{t.academicPrograms}</h3>
               <div className="space-y-2">
-                <div className="p-3 bg-gray-50 rounded-lg">
+                <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
                   <p className="font-semibold">{t.program1}</p>
-                  <p className="text-sm text-gray-600">{t.program1Desc}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{t.program1Desc}</p>
                 </div>
-                <div className="p-3 bg-gray-50 rounded-lg">
+                <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
                   <p className="font-semibold">{t.program2}</p>
-                  <p className="text-sm text-gray-600">{t.program2Desc}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{t.program2Desc}</p>
                 </div>
-                <div className="p-3 bg-gray-50 rounded-lg">
+                <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
                   <p className="font-semibold">{t.program3}</p>
-                  <p className="text-sm text-gray-600">{t.program3Desc}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{t.program3Desc}</p>
                 </div>
               </div>
             </div>
@@ -48,23 +45,23 @@ export function AcademicsPage({ language }: AcademicsPageProps) {
             <div>
               <h3 className="mb-3">{t.academicAdvocacy}</h3>
               <div className="space-y-2">
-                <div className="p-3 bg-gray-50 rounded-lg">
+                <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
                   <p className="font-semibold">{t.advocacy1}</p>
-                  <p className="text-sm text-gray-600">{t.advocacy1Desc}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{t.advocacy1Desc}</p>
                 </div>
-                <div className="p-3 bg-gray-50 rounded-lg">
+                <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
                   <p className="font-semibold">{t.advocacy2}</p>
-                  <p className="text-sm text-gray-600">{t.advocacy2Desc}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{t.advocacy2Desc}</p>
                 </div>
-                <div className="p-3 bg-gray-50 rounded-lg">
+                <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
                   <p className="font-semibold">{t.advocacy3}</p>
-                  <p className="text-sm text-gray-600">{t.advocacy3Desc}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{t.advocacy3Desc}</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <Card className="bg-red-50 border-red-200">
+          <Card className="bg-red-50 dark:bg-red-950 border-red-200 dark:border-red-800">
             <CardHeader>
               <CardTitle>{t.importantDates}</CardTitle>
             </CardHeader>

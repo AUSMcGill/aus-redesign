@@ -1,14 +1,11 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
-import { ImageWithFallback } from '../figma/ImageWithFallback';
-import { translations, Language } from '../../lib/translations';
-import React from 'react';
+import { translations } from '../../lib/translations';
+import { useApp } from '../../lib/AppContext';
+import mcgillArtsImage from '../../assets/0dd661c2df700c302313b4e79dabfdf5ed77ee80.png';
 
-interface AboutPageProps {
-  language: Language;
-}
-
-export function AboutPage({ language }: AboutPageProps) {
+export function AboutPage() {
+  const { language } = useApp();
   const t = translations[language];
 
   return (
@@ -23,9 +20,9 @@ export function AboutPage({ language }: AboutPageProps) {
             {t.aboutDesc}
           </p>
           <div className="relative h-64 rounded-lg overflow-hidden">
-            <ImageWithFallback
-              src="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWFtJTIwbWVldGluZyUyMGNvbGxhYm9yYXRpb258ZW58MXx8fHwxNzYxMzYyMTA5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-              alt="Team collaboration"
+            <img
+              src={mcgillArtsImage}
+              alt={language === 'en' ? 'McGill Arts Building in Fall' : 'Bâtiment des Arts de McGill en automne'}
               className="w-full h-full object-cover"
             />
           </div>

@@ -1,5 +1,11 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
+import { FileText, BookOpen, Users, GraduationCap, Calendar } from 'lucide-react';
+import { translations } from '../../lib/translations';
+import { useApp } from '../../lib/AppContext';
+
+export function ResourcesPage() {
+  const { language } = useApp();
 import { FileText, BookOpen, Users, GraduationCap, Calendar as CalendarIcon, UtensilsCrossed, MapPin, DollarSign, Tag, Ticket, CreditCard, Video, Music, PenTool, GraduationCap as GraduationCapIcon, Brain, Languages, Shield, Laptop, Library, Building2, Users as UsersIcon, DoorOpen, CheckCircle2, AlertCircle, Clock, X } from 'lucide-react';
 import { translations, Language } from '../../lib/translations';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
