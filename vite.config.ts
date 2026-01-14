@@ -2,8 +2,11 @@
   import { defineConfig } from 'vite';
   import react from '@vitejs/plugin-react-swc';
   import path from 'path';
+  import { visualizer } from 'rollup-plugin-visualizer';
 
-  export default defineConfig({
+  export default defineConfig(() => {
+    const analyze = process.env.ANALYZE === '1' || process.env.ANALYZE === 'true';
+    return {
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
@@ -54,9 +57,32 @@
     build: {
       target: 'esnext',
       outDir: 'build',
+      rollupOptions: {
+        plugins: analyze
+          ? [
+              visualizer({
+                filename: 'build/stats.html',
+                gzipSize: true,
+                brotliSize: true,
+                open: false,
+              }),
+            ]
+          : [],
+        output: {
+          manualChunks(id) {
+            if (!id.includes('node_modules')) return;
+            if (id.includes('react-router')) return 'router';
+            if (id.includes('/react/') || id.includes('/react-dom/')) return 'react';
+            if (id.includes('@radix-ui')) return 'radix';
+            if (id.includes('lucide-react')) return 'icons';
+            return 'vendor';
+          },
+        },
+      },
     },
     server: {
       port: 3000,
       open: true,
     },
-  });
+  };
+});

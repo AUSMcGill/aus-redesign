@@ -24,6 +24,8 @@ export function AboutPage() {
               src={mcgillArtsImage}
               alt={language === 'en' ? 'McGill Arts Building in Fall' : 'Bâtiment des Arts de McGill en automne'}
               className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </CardContent>
