@@ -33,7 +33,14 @@ export function Header() {
       <div className="container mx-auto px-4 py-6">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-4 hover:opacity-80 transition-opacity cursor-pointer">
-            <ImageWithFallback src={ausLogo} alt="AUS Logo" className="h-16 w-16 md:h-20 md:w-20 object-contain" />
+            <ImageWithFallback
+              src={ausLogo}
+              alt="AUS Logo"
+              className="h-16 w-16 md:h-20 md:w-20 object-contain"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+            />
             <div className="h-16 md:h-20 w-px bg-red-700 dark:bg-red-600"></div>
             <div>
               <h1 className="text-3xl">{t.headerTitle}</h1>

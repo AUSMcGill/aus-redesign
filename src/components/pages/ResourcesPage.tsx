@@ -1,27 +1,41 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
-import { Button } from '../ui/button';
-import { FileText, BookOpen, Users, GraduationCap, Calendar } from 'lucide-react';
-import { translations } from '../../lib/translations';
+import { useState } from 'react';
+import type { ReactNode } from 'react';
+import {
+  Brain,
+  Building2,
+  Calendar as CalendarIcon,
+  CheckCircle2,
+  Clock,
+  CreditCard,
+  DollarSign,
+  DoorOpen,
+  GraduationCap as GraduationCapIcon,
+  Laptop,
+  Languages,
+  Library,
+  MapPin,
+  Music,
+  PenTool,
+  Shield,
+  Tag,
+  Ticket,
+  Users as UsersIcon,
+  UtensilsCrossed,
+  Video,
+  X,
+} from 'lucide-react';
+import { translations, type Language } from '../../lib/translations';
 import { useApp } from '../../lib/AppContext';
-
-export function ResourcesPage() {
-  const { language } = useApp();
-import { FileText, BookOpen, Users, GraduationCap, Calendar as CalendarIcon, UtensilsCrossed, MapPin, DollarSign, Tag, Ticket, CreditCard, Video, Music, PenTool, GraduationCap as GraduationCapIcon, Brain, Languages, Shield, Laptop, Library, Building2, Users as UsersIcon, DoorOpen, CheckCircle2, AlertCircle, Clock, X } from 'lucide-react';
-import { translations, Language } from '../../lib/translations';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
 import { Badge } from '../ui/badge';
-import { Input } from '../ui/input';
-import { Label } from '../ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import { Button } from '../ui/button';
 import { Calendar } from '../ui/calendar';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
+import { Label } from '../ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import { Textarea } from '../ui/textarea';
-import React, { useState } from 'react';
-
-interface ResourcesPageProps {
-  language: Language;
-}
 
 interface FoodOption {
   name: string;
@@ -42,7 +56,7 @@ interface Subscription {
   name: string;
   description: string;
   resourceType: 'Free Subscription from McGill' | 'Free subscription from SSMU' | 'General Canadian Student Discount' | 'McGill Service';
-  icon?: React.ReactNode;
+  icon?: ReactNode;
 }
 
 interface StudySpace {
@@ -353,7 +367,8 @@ function RoomBookingInterface({ language }: { language: Language }) {
   );
 }
 
-export function ResourcesPage({ language }: ResourcesPageProps) {
+export function ResourcesPage() {
+  const { language } = useApp();
   const t = translations[language];
 
   const onCampusFoodOptions: FoodOption[] = [
