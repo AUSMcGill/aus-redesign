@@ -12,6 +12,21 @@ export function ResourcesPage() {
     <div className="space-y-6">
       <Card>
         <CardHeader>
+          <CardTitle>Student Resources</CardTitle>
+          <CardDescription>Browse all available student resources below</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="w-full overflow-hidden rounded-lg" style={{ height: '600px' }}>
+            <iframe
+              src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTdYqXi8L_HjdpcpOCwG8tUiXIP5VMRQlHr9uU3FEWfm6ST2DODWTlemCQdcnQQF3LvPBibxJPwx23D/pubhtml?widget=true&headers=false"
+              className="w-full h-full border-0"
+              title="Student Resources"
+            />
+          </div>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader>
           <CardTitle>{t.resourcesTitle}</CardTitle>
           <CardDescription>{t.resourcesSubtitle}</CardDescription>
         </CardHeader>
