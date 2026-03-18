@@ -32,6 +32,7 @@ export default function App() {
               <Route path="/about" element={<AboutPage />} />
               <Route path="/involvement" element={<InvolvementPage />} />
               <Route path="/resources" element={<ResourcesPage />} />
+              <Route path="/resources/:categorySlug" element={<ResourcesPage />} />
               <Route path="/academics" element={<AcademicsPage />} />
               <Route path="/past-executives" element={<PastExecutivesPage />} />
               <Route path="/contact" element={<ContactPage />} />
