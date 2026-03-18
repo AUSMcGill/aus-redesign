@@ -3,6 +3,7 @@ export interface AusExecutive {
   name: string;
   email: string;
   officeHours: string;
+  photoUrl?: string;
 }
 
 function parseTable(text: string): Record<string, string>[] {
@@ -74,12 +75,19 @@ export async function fetchAusExecutives(): Promise<AusExecutive[]> {
         row["Office Hours | Heures de Bureau"] ??
         row["Office Hours"] ??
         "";
+      const photoUrl =
+        row["Photo URL"] ??
+        row["Headshot URL"] ??
+        row["Image URL"] ??
+        row["Photo"] ??
+        "";
 
       return {
         position,
         name,
         email,
-        officeHours
+        officeHours,
+        photoUrl: photoUrl || undefined,
       };
     })
     .filter((exec) => exec.position && exec.name);

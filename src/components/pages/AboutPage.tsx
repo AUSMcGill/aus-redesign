@@ -161,36 +161,64 @@ export function AboutPage() {
 
         {!loadingExecs && !execsError && (
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {executives.map((exec) => (
-              <Card key={`${exec.position}-${exec.name}`}>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-base">{exec.name}</CardTitle>
-                  <CardDescription className="text-xs font-medium text-primary">
-                    {exec.position}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-1 text-xs">
-                  {exec.officeHours && (
-                    <p>
-                      <span className="font-medium">
-                        {language === 'en' ? 'Office hours: ' : 'Heures de bureau : '}
-                      </span>
-                      {exec.officeHours}
-                    </p>
-                  )}
-                  {exec.email && (
-                    <p>
-                      <a
-                        href={`mailto:${exec.email}`}
-                        className="underline underline-offset-2"
-                      >
-                        {exec.email}
-                      </a>
-                    </p>
-                  )}
-                </CardContent>
-              </Card>
-            ))}
+            {executives.map((exec) => {
+              const initials =
+                exec.name
+                  .split(' ')
+                  .filter(Boolean)
+                  .slice(0, 2)
+                  .map((part) => part.charAt(0).toUpperCase())
+                  .join('') || '?';
+
+              return (
+                <Card key={`${exec.position}-${exec.name}`}>
+                  <CardHeader className="pb-3 flex flex-row items-center gap-4">
+                    <div className="w-14 h-14 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center overflow-hidden shrink-0">
+                      {exec.photoUrl ? (
+                        // Using a plain img tag so photos can be hosted anywhere (sheet URLs or /public)
+                        // without extra Next.js image domain configuration.
+                        <img
+                          src={exec.photoUrl}
+                          alt={exec.name}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">
+                          {initials}
+                        </span>
+                      )}
+                    </div>
+                    <div>
+                      <CardTitle className="text-base">{exec.name}</CardTitle>
+                      <CardDescription className="text-xs font-medium text-primary">
+                        {exec.position}
+                      </CardDescription>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-1 text-xs">
+                    {exec.officeHours && (
+                      <p>
+                        <span className="font-medium">
+                          {language === 'en' ? 'Office hours: ' : 'Heures de bureau : '}
+                        </span>
+                        {exec.officeHours}
+                      </p>
+                    )}
+                    {exec.email && (
+                      <p>
+                        <a
+                          href={`mailto:${exec.email}`}
+                          className="underline underline-offset-2"
+                        >
+                          {exec.email}
+                        </a>
+                      </p>
+                    )}
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         )}
       </section>
@@ -206,12 +234,14 @@ export function AboutPage() {
             ? 'View the full, always up-to-date office hours schedule from the Arts Public Directory.'
             : 'Consultez l’horaire complet et toujours à jour des heures de bureau dans le répertoire public des Arts.'}
         </p>
-        <div className="w-full rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
-          <iframe
-            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT3-7MBB3-LziWVdqxPMd5S-FrVDakPBAg1YfZMzLJxYz5toXAqzvBCm_E9_lpxRpqMUbMFWf3gjerG/pubhtml?gid=1296473483&single=true&widget=true&headers=false"
-            className="w-full h-[600px]"
-            loading="lazy"
-          />
+        <div className="w-full rounded-lg overflow-auto border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
+          <div className="min-w-[900px]">
+            <iframe
+              src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT3-7MBB3-LziWVdqxPMd5S-FrVDakPBAg1YfZMzLJxYz5toXAqzvBCm_E9_lpxRpqMUbMFWf3gjerG/pubhtml?gid=1296473483&single=true&widget=true&headers=false"
+              className="w-[1200px] h-[750px] scale-[0.8] md:scale-[0.9] origin-top-left"
+              loading="lazy"
+            />
+          </div>
         </div>
       </section>
     </div>
