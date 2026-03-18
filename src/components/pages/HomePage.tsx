@@ -1,3 +1,5 @@
+'use client';
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import { Calendar, Users, BookOpen, Mail, Bell, ArrowRight, Newspaper, GraduationCap, FileText, MapPin } from 'lucide-react';
@@ -14,7 +16,7 @@ export function HomePage() {
       {/* Hero Section */}
       <div className="relative h-64 md:h-80 overflow-hidden -mx-4 md:-mx-0 mb-6 rounded-none md:rounded-lg">
         <img
-          src={mcgillArtsImage}
+          src={mcgillArtsImage.src}
           alt={language === 'en' ? 'McGill Arts Building in Fall' : 'Bâtiment des Arts de McGill en automne'}
           className="w-full h-full object-cover"
           decoding="async"

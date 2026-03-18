@@ -1,3 +1,5 @@
+'use client';
+
 import { Header } from './Header';
 import { translations } from '../lib/translations';
 import { useApp } from '../lib/AppContext';

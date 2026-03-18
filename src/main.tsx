@@ -1,7 +1,5 @@
+'use client';
 
-  import { createRoot } from "react-dom/client";
-  import App from "./App.tsx";
-  import "./index.css";
-
-  createRoot(document.getElementById("root")!).render(<App />);
-  
+// This Vite entrypoint is not used by Next.js App Router.
+// It is kept only to avoid breaking local tooling that still references it.
+export {};

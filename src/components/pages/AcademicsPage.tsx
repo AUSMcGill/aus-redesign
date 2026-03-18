@@ -1,3 +1,5 @@
+'use client';
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { translations } from '../../lib/translations';
