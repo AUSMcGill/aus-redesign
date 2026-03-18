@@ -234,14 +234,13 @@ export function AboutPage() {
             ? 'View the full, always up-to-date office hours schedule from the Arts Public Directory.'
             : 'Consultez l’horaire complet et toujours à jour des heures de bureau dans le répertoire public des Arts.'}
         </p>
-        <div className="w-full rounded-lg overflow-auto border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
-          <div className="min-w-[900px]">
-            <iframe
-              src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT3-7MBB3-LziWVdqxPMd5S-FrVDakPBAg1YfZMzLJxYz5toXAqzvBCm_E9_lpxRpqMUbMFWf3gjerG/pubhtml?gid=1296473483&single=true&widget=true&headers=false"
-              className="w-[1200px] h-[750px] scale-[0.8] md:scale-[0.9] origin-top-left"
-              loading="lazy"
-            />
-          </div>
+        <div className="w-full rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
+          <iframe
+            title="AUS Executive Council Office Hours"
+            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT3-7MBB3-LziWVdqxPMd5S-FrVDakPBAg1YfZMzLJxYz5toXAqzvBCm_E9_lpxRpqMUbMFWf3gjerG/pubhtml?gid=1296473483&single=true&widget=true&headers=false"
+            className="w-full h-[80vh] min-h-[700px]"
+            loading="lazy"
+          />
         </div>
       </section>
     </div>

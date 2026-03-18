@@ -40,7 +40,7 @@ function parseTable(text: string): Record<string, string>[] {
 
 export async function fetchAusExecutives(): Promise<AusExecutive[]> {
   const defaultUrl =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vT3-7MBB3-LziWVdqxPMd5S-FrVDakPBAg1YfZMzLJxYz5toXAqzvBCm_E9_lpxRpqMUbMFWf3gjerG/pub?gid=0&single=true&output=tsv";
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vT3-7MBB3-LziWVdqxPMd5S-FrVDakPBAg1YfZMzLJxYz5toXAqzvBCm_E9_lpxRpqMUbMFWf3gjerG/pub?gid=0&single=true&output=csv";
 
   const url =
     process.env.NEXT_PUBLIC_AUS_EXEC_CSV_URL ??
