@@ -221,23 +221,11 @@ export function AboutPage() {
             })}
           </div>
         )}
-      </section>
 
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold">
-          {language === 'en'
-            ? 'Executive Council Office Hours'
-            : 'Heures de bureau du conseil exécutif'}
-        </h2>
-        <p className="text-sm text-muted-foreground">
-          {language === 'en'
-            ? 'View the full, always up-to-date office hours schedule from the Arts Public Directory.'
-            : 'Consultez l’horaire complet et toujours à jour des heures de bureau dans le répertoire public des Arts.'}
-        </p>
         <div className="w-full rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
           <iframe
             title={language === 'en' ? 'AUS Executive Council Office Hours' : 'Heures de bureau du conseil exécutif'}
-            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT3-7MBB3-LziWVdqxPMd5S-FrVDakPBAg1YfZMzLJxYz5toXAqzvBCm_E9_lpxRpqMUbMFWf3gjerG/htmlembed?gid=1296473483&single=true&widget=false&headers=false&chrome=false"
+            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT3-7MBB3-LziWVdqxPMd5S-FrVDakPBAg1YfZMzLJxYz5toXAqzvBCm_E9_lpxRpqMUbMFWf3gjerG/pubhtml?gid=1296473483&single=true&widget=true&headers=false"
             className="w-full h-[85vh] min-h-[900px]"
             loading="lazy"
           />

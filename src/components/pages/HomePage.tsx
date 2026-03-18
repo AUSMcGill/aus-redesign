@@ -1,8 +1,9 @@
 'use client';
 
+import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
-import { Calendar, Users, BookOpen, Mail, Bell, ArrowRight, Newspaper, GraduationCap, FileText, MapPin } from 'lucide-react';
+import { Calendar, Users, BookOpen, Bell, ArrowRight, Newspaper, GraduationCap, FileText, MapPin } from 'lucide-react';
 import { translations } from '../../lib/translations';
 import { useApp } from '../../lib/AppContext';
 import mcgillArtsImage from '../../assets/0dd661c2df700c302313b4e79dabfdf5ed77ee80.png';
@@ -47,34 +48,38 @@ export function HomePage() {
 
           <Card className="opacity-90 bg-gradient-to-br from-red-500 to-red-700 text-white hover:shadow-lg transition-shadow cursor-pointer">
             <CardHeader>
-              <Users className="w-10 h-10 mb-2" />
+              <FileText className="w-10 h-10 mb-2" />
               <CardTitle>{t.quickJoinCommittee}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-red-50 mb-3">{t.quickJoinCommitteeDesc}</p>
-              <Button variant="secondary" size="sm" className="w-full">{t.applyNow}</Button>
-            </CardContent>
-          </Card>
-
-          <Card className="opacity-90 bg-gradient-to-br from-red-500 to-red-700 text-white hover:shadow-lg transition-shadow cursor-pointer">
-            <CardHeader>
-              <BookOpen className="w-10 h-10 mb-2" />
-              <CardTitle>{t.quickStudyResources}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-red-50 mb-3">{t.quickStudyResourcesDesc}</p>
               <Button variant="secondary" size="sm" className="w-full">{t.browse}</Button>
             </CardContent>
           </Card>
 
           <Card className="opacity-90 bg-gradient-to-br from-red-500 to-red-700 text-white hover:shadow-lg transition-shadow cursor-pointer">
             <CardHeader>
-              <Mail className="w-10 h-10 mb-2" />
+              <Users className="w-10 h-10 mb-2" />
+              <CardTitle>{t.quickStudyResources}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-red-50 mb-3">{t.quickStudyResourcesDesc}</p>
+              <Button variant="secondary" size="sm" className="w-full">
+                {language === 'en' ? 'Open directory' : 'Ouvrir l’annuaire'}
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="opacity-90 bg-gradient-to-br from-red-500 to-red-700 text-white hover:shadow-lg transition-shadow cursor-pointer">
+            <CardHeader>
+              <BookOpen className="w-10 h-10 mb-2" />
               <CardTitle>{t.quickContactUs}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-red-50 mb-3">{t.quickContactUsDesc}</p>
-              <Button variant="secondary" size="sm" className="w-full">{t.sendMessage}</Button>
+              <Button variant="secondary" size="sm" className="w-full">
+                {language === 'en' ? 'See governance' : 'Voir la gouvernance'}
+              </Button>
             </CardContent>
           </Card>
         </div>
@@ -119,48 +124,20 @@ export function HomePage() {
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 text-center">
-                  <div className="bg-red-600 text-white rounded-lg p-2 w-14">
-                    <p className="text-xs">{language === 'en' ? 'OCT' : 'OCT'}</p>
-                    <p className="text-2xl">28</p>
-                  </div>
-                </div>
-                <div className="flex-grow">
-                  <p className="font-semibold">{t.event1Title}</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">{t.event1Desc}</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">{t.event1Time}</p>
-                </div>
+              <div className="w-full rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+                <iframe
+                  src="https://calendar.google.com/calendar/embed?mode=AGENDA&src=c0a4c1356471c498c008851ab20dcfafc4e57d9e2ad173d57c76479a2f2f31c1%40group.calendar.google.com&ctz=America%2FToronto"
+                  className="w-full h-[360px] border-0"
+                  frameBorder="0"
+                  scrolling="no"
+                  title="AUS Upcoming Events"
+                />
               </div>
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 text-center">
-                  <div className="bg-blue-600 text-white rounded-lg p-2 w-14">
-                    <p className="text-xs">{language === 'en' ? 'NOV' : 'NOV'}</p>
-                    <p className="text-2xl">2</p>
-                  </div>
-                </div>
-                <div className="flex-grow">
-                  <p className="font-semibold">{t.event2Title}</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">{t.event2Desc}</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">{t.event2Time}</p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 text-center">
-                  <div className="bg-green-600 text-white rounded-lg p-2 w-14">
-                    <p className="text-xs">{language === 'en' ? 'NOV' : 'NOV'}</p>
-                    <p className="text-2xl">10</p>
-                  </div>
-                </div>
-                <div className="flex-grow">
-                  <p className="font-semibold">{t.event3Title}</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">{t.event3Desc}</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">{t.event3Time}</p>
-                </div>
-              </div>
-              <Button variant="outline" className="w-full mt-2">
+              <Button asChild variant="outline" className="w-full mt-2">
+                <Link href="/involvement">
                 <span>{t.viewFullCalendar}</span>
                 <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
               </Button>
             </CardContent>
           </Card>

@@ -89,10 +89,8 @@ export function InvolvementPage() {
         <CardContent>
           <div className="w-full rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
             <iframe
-              src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FToronto&bgcolor=%23ffffff&src=en.canadian%23holiday%40group.v.calendar.google.com&color=%230B8043"
-              style={{ border: 0 }}
-              width="100%"
-              height="600"
+              src="https://calendar.google.com/calendar/embed?src=c0a4c1356471c498c008851ab20dcfafc4e57d9e2ad173d57c76479a2f2f31c1%40group.calendar.google.com&ctz=America%2FToronto"
+              className="w-full h-[700px] border-0"
               frameBorder="0"
               scrolling="no"
               title={t.calendarTitle}

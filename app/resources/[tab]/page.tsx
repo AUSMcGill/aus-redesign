@@ -1,116 +1,54 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../../src/components/ui/card';
-import { RippleButton } from '../../../src/components/ui/ripple-button';
+import { Button } from '../../../src/components/ui/button';
+import Link from 'next/link';
+import { fetchResourceSubtabs } from '../../../src/lib/resourceSubtabs';
 
 export const dynamic = 'force-dynamic';
 
-interface ResourceRow {
-  [key: string]: string;
-}
-
-function parseCsv(text: string): { headers: string[]; rows: ResourceRow[] } {
-  const lines = text.split(/\r?\n/).filter((line) => line.trim().length > 0);
-  if (lines.length < 2) return { headers: [], rows: [] };
-
-  const [headerLine, ...dataLines] = lines;
-  const headers = headerLine.split(',').map((h) => h.trim());
-
-  const rows = dataLines.map((line) => {
-    const cells = line.split(',');
-    const record: ResourceRow = {};
-    headers.forEach((h, i) => {
-      record[h] = (cells[i] ?? '').trim();
-    });
-    return record;
-  });
-
-  return { headers, rows };
-}
-
-async function getResources(): Promise<{ headers: string[]; rows: ResourceRow[] }> {
-  const url =
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTdYqXi8L_HjdpcpOCwG8tUiXIP5VMRQlHr9uU3FEWfm6ST2DODWTlemCQdcnQQF3LvPBibxJPwx23D/pub?output=csv';
-
-  const res = await fetch(url, { cache: 'no-store' });
-  if (!res.ok) {
-    throw new Error(`Failed to fetch resources CSV: ${res.status} ${res.statusText}`);
-  }
-
-  const text = await res.text();
-  return parseCsv(text);
-}
-
 export default async function ResourceSubpage(props: any) {
   const tab: string = typeof props?.params?.tab === 'string' ? props.params.tab : '';
-  const { headers, rows } = await getResources();
-
-  // Try to filter by a "Tab" or "Category" column if present; otherwise show all rows.
-  const normalizedTab = tab.replace(/-/g, ' ').toLowerCase();
-  const categoryKey =
-    headers.find((h) => h.toLowerCase() === 'tab') ??
-    headers.find((h) => h.toLowerCase() === 'category') ??
-    null;
-
-  const linkKey =
-    headers.find((h) => h.toLowerCase().includes('hyperlink')) ??
-    headers.find((h) => h.toLowerCase() === 'link') ??
-    headers.find((h) => h.toLowerCase().includes('url')) ??
-    null;
-
-  const filtered = categoryKey
-    ? rows.filter((row) => (row[categoryKey] ?? '').toLowerCase() === normalizedTab)
-    : rows;
-
-  // If we can filter by a known category column, respect the filter even when it yields 0 rows
-  // so the empty-state message can show. Only fall back to "all rows" when we can't filter.
-  const displayRows = categoryKey ? filtered : rows;
+  const subtabs = await fetchResourceSubtabs();
+  const activeTab = subtabs.find((item) => item.slug === tab) ?? null;
 
   return (
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Resources – {tab.replace(/-/g, ' ')}</CardTitle>
+          <CardTitle>Resources - {activeTab?.name ?? tab.replace(/-/g, ' ')}</CardTitle>
           <CardDescription>
-            Loaded live from the AUS Resources spreadsheet.
+            Loaded live from the resources spreadsheet subtab.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-3">
-          {displayRows.length === 0 && (
-            <p className="text-sm text-muted-foreground">
-              No resources found for this section yet.
-            </p>
-          )}
-          <div className="space-y-3">
-            {displayRows.map((row, idx) => (
-              <div
-                key={`${row['Name'] ?? row['Title'] ?? idx}-${idx}`}
-                className="border rounded-lg px-4 py-3 bg-background"
+          <div className="flex flex-wrap gap-2">
+            <Button asChild variant="outline" size="sm">
+              <Link href="/resources">Back to resources</Link>
+            </Button>
+            {subtabs.map((item) => (
+              <Button
+                asChild
+                size="sm"
+                key={`${item.slug}-${item.gid}`}
+                variant={item.slug === tab ? 'default' : 'outline'}
               >
-                <h3 className="font-semibold text-sm">
-                  {row['Name'] ?? row['Title'] ?? row['Resource'] ?? 'Resource'}
-                </h3>
-                {row['Description'] && (
-                  <p className="text-xs text-muted-foreground mt-1">{row['Description']}</p>
-                )}
-                {(() => {
-                  const resourceLink = linkKey
-                    ? row[linkKey]
-                    : row['Link'] ?? row['URL'] ?? row['Website'] ?? '';
-
-                  const trimmed = resourceLink?.trim?.() ? resourceLink.trim() : '';
-                  if (!trimmed) return null;
-
-                  return (
-                    <RippleButton
-                      href={trimmed}
-                      className="mt-2 text-xs px-3 py-1 rounded-md"
-                    >
-                      Open resource
-                    </RippleButton>
-                  );
-                })()}
-              </div>
+                <Link href={`/resources/${item.slug}`}>{item.name}</Link>
+              </Button>
             ))}
           </div>
+          {activeTab ? (
+            <div className="w-full h-[85vh] min-h-[900px] rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+              <iframe
+                src={`https://docs.google.com/spreadsheets/d/e/2PACX-1vTdYqXi8L_HjdpcpOCwG8tUiXIP5VMRQlHr9uU3FEWfm6ST2DODWTlemCQdcnQQF3LvPBibxJPwx23D/pubhtml?gid=${activeTab.gid}&single=true&widget=true&headers=false`}
+                className="w-full h-full"
+                loading="lazy"
+                title={`Resources - ${activeTab.name}`}
+              />
+            </div>
+          ) : (
+            <p className="text-sm text-muted-foreground">
+              This resource subtab was not found in the live spreadsheet.
+            </p>
+          )}
         </CardContent>
       </Card>
     </div>

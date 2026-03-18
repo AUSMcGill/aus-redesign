@@ -13,20 +13,21 @@ export const translations = {
     // Navigation
     navHome: "Home",
     navAbout: "About Us",
+    navIncomingStudents: "Incoming Students",
     navInvolvement: "Involvement",
     navResources: "Resources",
     navAcademics: "Academics",
-    navContact: "Contact",
+    navSponsorship: "Sponsorship",
     
     // Quick Links
     quickUpcomingEvents: "Upcoming Events",
     quickUpcomingEventsDesc: "Check out what's happening this month",
-    quickJoinCommittee: "Join a Committee",
-    quickJoinCommitteeDesc: "Get involved and make a difference",
-    quickStudyResources: "Study Resources",
-    quickStudyResourcesDesc: "Access study guides and tutoring",
-    quickContactUs: "Contact Us",
-    quickContactUsDesc: "Get in touch with the AUS team",
+    quickJoinCommittee: "Student Resources",
+    quickJoinCommitteeDesc: "Browse support services, guides, and key student tools.",
+    quickStudyResources: "32 Departmental Associations",
+    quickStudyResourcesDesc: "Find your departmental association and stay connected.",
+    quickContactUs: "How We Run",
+    quickContactUsDesc: "Learn how AUS governance, council, and representation work.",
     viewCalendar: "View Calendar",
     applyNow: "Apply Now",
     browse: "Browse",
@@ -294,7 +295,7 @@ export const translations = {
   },
   fr: {
     // Header
-    headerTitle: "Association Étudiante de la Faculté des Arts à l'Université McGill",
+    headerTitle: "Association Étudiante de la Faculté des Arts",
     headerSubtitle: "Université McGill",
     
     // Hero
@@ -304,20 +305,21 @@ export const translations = {
     // Navigation
     navHome: "Accueil",
     navAbout: "À propos",
+    navIncomingStudents: "Nouveaux étudiants",
     navInvolvement: "Implication",
     navResources: "Ressources",
     navAcademics: "Académique",
-    navContact: "Contact",
+    navSponsorship: "Commandites",
     
     // Quick Links
     quickUpcomingEvents: "Événements à venir",
     quickUpcomingEventsDesc: "Découvrez ce qui se passe ce mois-ci",
-    quickJoinCommittee: "Rejoindre un comité",
-    quickJoinCommitteeDesc: "Impliquez-vous et faites la différence",
-    quickStudyResources: "Ressources d'étude",
-    quickStudyResourcesDesc: "Accédez aux guides et au tutorat",
-    quickContactUs: "Nous contacter",
-    quickContactUsDesc: "Contactez l'équipe de l'AÉFA",
+    quickJoinCommittee: "Ressources étudiantes",
+    quickJoinCommitteeDesc: "Consultez les services de soutien, guides et outils essentiels.",
+    quickStudyResources: "32 associations départementales",
+    quickStudyResourcesDesc: "Trouvez votre association départementale et restez connecté·e.",
+    quickContactUs: "Comment nous fonctionnons",
+    quickContactUsDesc: "Découvrez le fonctionnement de la gouvernance, du conseil et de la représentation de l’AÉFA.",
     viewCalendar: "Voir le calendrier",
     applyNow: "Postuler maintenant",
     browse: "Parcourir",

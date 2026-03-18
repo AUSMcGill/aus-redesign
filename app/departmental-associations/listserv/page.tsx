@@ -1,31 +1,69 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../../src/components/ui/card';
 import { Button } from '../../../src/components/ui/button';
+import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
 
 interface ListservRow {
   name: string;
-  description?: string;
-  listservUrl?: string;
-  websiteUrl?: string;
-  logoUrl?: string;
+  submissionMethod?: string;
+  submissionDeadline?: string;
+  frequency?: string;
+  links: string[];
 }
 
-function parseCsv(text: string): Record<string, string>[] {
-  const lines = text.split(/\r?\n/).filter((line) => line.trim().length > 0);
-  if (lines.length < 2) return [];
+function parseCsvLine(line: string): string[] {
+  const cells: string[] = [];
+  let current = '';
+  let inQuotes = false;
 
-  const [headerLine, ...dataLines] = lines;
-  const headers = headerLine.split(',').map((h) => h.trim());
+  for (let i = 0; i < line.length; i += 1) {
+    const char = line[i];
 
-  return dataLines.map((line) => {
-    const cells = line.split(',');
-    const record: Record<string, string> = {};
-    headers.forEach((h, i) => {
-      record[h] = (cells[i] ?? '').trim();
-    });
-    return record;
-  });
+    if (char === '"') {
+      if (inQuotes && line[i + 1] === '"') {
+        current += '"';
+        i += 1;
+      } else {
+        inQuotes = !inQuotes;
+      }
+      continue;
+    }
+
+    if (char === ',' && !inQuotes) {
+      cells.push(current.trim());
+      current = '';
+      continue;
+    }
+
+    current += char;
+  }
+
+  cells.push(current.trim());
+  return cells;
+}
+
+function parseCsv(text: string): string[][] {
+  return text
+    .split(/\r?\n/)
+    .map((line) => parseCsvLine(line))
+    .filter((row) => row.some((cell) => cell.trim().length > 0));
+}
+
+function extractUrls(value: string): string[] {
+  if (!value) return [];
+  const urls = new Set<string>();
+  const plainUrlMatches = value.match(/https?:\/\/[^\s,"]+/g) ?? [];
+  plainUrlMatches.forEach((url) => urls.add(url));
+
+  const hyperlinkFormulaRegex = /HYPERLINK\("([^"]+)"/gi;
+  let match: RegExpExecArray | null = hyperlinkFormulaRegex.exec(value);
+  while (match) {
+    if (match[1]) urls.add(match[1]);
+    match = hyperlinkFormulaRegex.exec(value);
+  }
+
+  return Array.from(urls);
 }
 
 async function getListservRows(): Promise<ListservRow[]> {
@@ -40,45 +78,32 @@ async function getListservRows(): Promise<ListservRow[]> {
   const text = await res.text();
   const rows = parseCsv(text);
 
-  return rows.map((row) => {
-    const name =
-      row['Association'] ??
-      row['Department'] ??
-      row['Name'] ??
-      '';
+  const headerIndex = rows.findIndex((row) =>
+    row.some((cell) => cell.toLowerCase().includes('departmental association'))
+  );
 
-    const description =
-      row['Description'] ??
-      row['Notes'] ??
-      row['Note'] ??
-      '';
+  if (headerIndex === -1) return [];
 
-    const listservUrl =
-      row['Listserv URL'] ??
-      row['Listserv Link'] ??
-      row['Signup URL'] ??
-      row['Signup Link'] ??
-      '';
+  const dataRows = rows.slice(headerIndex + 1);
+  return dataRows
+    .map((row) => {
+      const name = (row[1] ?? row[2] ?? '').trim();
+      if (!name || name.toLowerCase().includes('faculty-wide listservs')) return null;
 
-    const websiteUrl =
-      row['Website'] ??
-      row['Website URL'] ??
-      row['Instagram'] ??
-      '';
+      const submissionMethod = (row[3] ?? '').trim();
+      const submissionDeadline = (row[4] ?? '').trim();
+      const frequency = (row[5] ?? '').trim();
+      const links = row.flatMap((cell) => extractUrls(cell));
 
-    const logoUrl =
-      row['Logo URL'] ??
-      row['Logo'] ??
-      '';
-
-    return {
-      name,
-      description: description || undefined,
-      listservUrl: listservUrl || undefined,
-      websiteUrl: websiteUrl || undefined,
-      logoUrl: logoUrl || undefined,
-    };
-  }).filter((row) => row.name);
+      return {
+        name,
+        submissionMethod: submissionMethod || undefined,
+        submissionDeadline: submissionDeadline || undefined,
+        frequency: frequency || undefined,
+        links,
+      } satisfies ListservRow;
+    })
+    .filter((row): row is ListservRow => Boolean(row));
 }
 
 export default async function DepartmentalListservPage() {
@@ -90,52 +115,56 @@ export default async function DepartmentalListservPage() {
         <CardHeader>
           <CardTitle>Departmental Associations Listservs</CardTitle>
           <CardDescription>
-            Subscribe to departmental listservs and stay up to date with news, events, and opportunities.
+            Loaded live from the departmental listserv Google Sheet. Add logo file names later and replace each placeholder with uploaded logos.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
+          <div className="flex flex-wrap gap-2">
+            <Button asChild variant="outline" size="sm">
+              <Link href="/departmental-associations">Directory</Link>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link href="/departmental-associations/publications">Publications</Link>
+            </Button>
+          </div>
           <div className="grid gap-4 md:grid-cols-2">
             {associations.map((assoc) => (
               <Card key={assoc.name}>
                 <CardHeader className="flex flex-row items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center overflow-hidden shrink-0">
-                    {assoc.logoUrl ? (
-                      <img
-                        src={assoc.logoUrl}
-                        alt={`${assoc.name} logo`}
-                        className="w-full h-full object-contain"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <span className="text-sm font-semibold text-gray-500 dark:text-gray-400">
-                        {assoc.name.charAt(0)}
-                      </span>
-                    )}
+                  <div className="w-14 h-14 rounded-md border border-dashed border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 flex items-center justify-center shrink-0">
+                    <span className="text-[10px] font-medium text-gray-500 dark:text-gray-400 text-center px-1">
+                      Logo
+                    </span>
                   </div>
                   <div>
                     <CardTitle className="text-base">{assoc.name}</CardTitle>
-                    {assoc.description && (
-                      <CardDescription className="text-xs mt-1">
-                        {assoc.description}
-                      </CardDescription>
-                    )}
+                    <CardDescription className="text-xs mt-1">
+                      {assoc.submissionMethod || 'Submission method not listed'}
+                    </CardDescription>
                   </div>
                 </CardHeader>
-                <CardContent className="flex flex-wrap gap-2 pt-0">
-                  {assoc.listservUrl && (
-                    <Button asChild size="sm">
-                      <a href={assoc.listservUrl} target="_blank" rel="noopener noreferrer">
-                        Join listserv
-                      </a>
+                <CardContent className="space-y-3 pt-0">
+                  <div className="space-y-1 text-xs text-muted-foreground">
+                    {assoc.submissionDeadline && <p><span className="font-medium">Deadline: </span>{assoc.submissionDeadline}</p>}
+                    {assoc.frequency && <p><span className="font-medium">Frequency: </span>{assoc.frequency}</p>}
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {assoc.links.map((link, idx) => (
+                      <Button asChild size="sm" key={`${assoc.name}-link-${idx}`}>
+                        <a href={link} target="_blank" rel="noopener noreferrer">
+                          Open link {idx + 1}
+                        </a>
+                      </Button>
+                    ))}
+                    {assoc.links.length === 0 && (
+                      <Button size="sm" variant="outline" disabled>
+                        Link not published yet
+                      </Button>
+                    )}
+                    <Button size="sm" variant="outline" disabled>
+                      Upload logo later
                     </Button>
-                  )}
-                  {assoc.websiteUrl && (
-                    <Button asChild size="sm" variant="outline">
-                      <a href={assoc.websiteUrl} target="_blank" rel="noopener noreferrer">
-                        Learn more
-                      </a>
-                    </Button>
-                  )}
+                  </div>
                 </CardContent>
               </Card>
             ))}

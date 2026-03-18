@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from './ui/button';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import { BookOpen, Users, FileText, Calendar, Mail, Home, Languages, Moon, Sun, Menu } from 'lucide-react';
+import { BookOpen, Users, FileText, Calendar, Home, Languages, Moon, Sun, Menu, UserPlus, Handshake } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,10 +26,11 @@ export function Header() {
   const navItems = [
     { path: '/', label: t.navHome, icon: Home },
     { path: '/about', label: t.navAbout, icon: Users },
+    { path: '/incoming-students', label: t.navIncomingStudents, icon: UserPlus },
     { path: '/involvement', label: t.navInvolvement, icon: Calendar },
     { path: '/resources', label: t.navResources, icon: FileText },
     { path: '/academics', label: t.navAcademics, icon: BookOpen },
-    { path: '/contact', label: t.navContact, icon: Mail },
+    { path: '/sponsorship', label: t.navSponsorship, icon: Handshake },
   ];
 
   return (
