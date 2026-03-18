@@ -7,10 +7,16 @@ import { Calendar, Users, BookOpen, Bell, ArrowRight, Newspaper, GraduationCap, 
 import { translations } from '../../lib/translations';
 import { useApp } from '../../lib/AppContext';
 import mcgillArtsImage from '../../assets/0dd661c2df700c302313b4e79dabfdf5ed77ee80.png';
+import type { Announcement } from '../../lib/announcements';
 
-export function HomePage() {
+interface HomePageProps {
+  announcements?: Announcement[];
+}
+
+export function HomePage({ announcements = [] }: HomePageProps) {
   const { language } = useApp();
   const t = translations[language];
+  const latestAnnouncements = announcements.slice(0, 3);
 
   return (
     <div>
@@ -94,24 +100,46 @@ export function HomePage() {
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="border-l-4 border-red-600 pl-4 py-2">
-                <p className="font-semibold">{t.announcement1Title}</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">{t.announcement1Desc}</p>
-                <p className="text-xs text-gray-500 dark:text-gray-500">{t.announcement1Date}</p>
-              </div>
-              <div className="border-l-4 border-blue-600 pl-4 py-2">
-                <p className="font-semibold">{t.announcement2Title}</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">{t.announcement2Desc}</p>
-                <p className="text-xs text-gray-500 dark:text-gray-500">{t.announcement2Date}</p>
-              </div>
-              <div className="border-l-4 border-green-600 pl-4 py-2">
-                <p className="font-semibold">{t.announcement3Title}</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">{t.announcement3Desc}</p>
-                <p className="text-xs text-gray-500 dark:text-gray-500">{t.announcement3Date}</p>
-              </div>
-              <Button variant="outline" className="w-full mt-2">
+              {latestAnnouncements.length > 0 ? (
+                latestAnnouncements.map((announcement, index) => {
+                  const borderColorClass =
+                    index === 0
+                      ? 'border-red-600'
+                      : index === 1
+                        ? 'border-blue-600'
+                        : 'border-green-600';
+                  return (
+                    <div key={announcement.id} className={`border-l-4 ${borderColorClass} pl-4 py-2`}>
+                      <p className="font-semibold">{announcement.title}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">{announcement.body}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-500">{announcement.date}</p>
+                      {announcement.link && (
+                        <a
+                          href={announcement.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs underline underline-offset-2 mt-1 inline-block"
+                        >
+                          {language === 'en' ? 'Read update' : 'Lire la mise à jour'}
+                        </a>
+                      )}
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="border-l-4 border-gray-300 pl-4 py-2">
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    {language === 'en'
+                      ? 'No announcements yet. Connect the announcements Google Sheet to publish updates automatically.'
+                      : "Aucune annonce pour le moment. Connectez la feuille Google des annonces pour publier automatiquement."}
+                  </p>
+                </div>
+              )}
+              <Button asChild variant="outline" className="w-full mt-2">
+                <Link href="/announcements">
                 <span>{t.viewAllAnnouncements}</span>
                 <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
               </Button>
             </CardContent>
           </Card>
@@ -127,7 +155,7 @@ export function HomePage() {
               <div className="w-full rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
                 <iframe
                   src="https://calendar.google.com/calendar/embed?mode=AGENDA&src=c0a4c1356471c498c008851ab20dcfafc4e57d9e2ad173d57c76479a2f2f31c1%40group.calendar.google.com&ctz=America%2FToronto"
-                  className="w-full h-[360px] border-0"
+                  className="w-full h-[520px] border-0"
                   frameBorder="0"
                   scrolling="no"
                   title="AUS Upcoming Events"

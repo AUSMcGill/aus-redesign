@@ -90,7 +90,7 @@ export function InvolvementPage() {
           <div className="w-full rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
             <iframe
               src="https://calendar.google.com/calendar/embed?src=c0a4c1356471c498c008851ab20dcfafc4e57d9e2ad173d57c76479a2f2f31c1%40group.calendar.google.com&ctz=America%2FToronto"
-              className="w-full h-[700px] border-0"
+              className="w-full h-[900px] border-0"
               frameBorder="0"
               scrolling="no"
               title={t.calendarTitle}
