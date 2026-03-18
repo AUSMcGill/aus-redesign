@@ -5,7 +5,7 @@ export interface AusExecutive {
   officeHours: string;
 }
 
-function parseCsv(text: string): Record<string, string>[] {
+function parseTable(text: string): Record<string, string>[] {
   const lines = text.split(/\r?\n/).filter((line) => line.trim().length > 0);
   if (lines.length === 0) return [];
 
@@ -23,10 +23,12 @@ function parseCsv(text: string): Record<string, string>[] {
   const headerLine = lines[headerIndex];
   const dataLines = lines.slice(headerIndex + 1);
 
-  const headers = headerLine.split(",").map((h) => h.trim());
+  // Detect delimiter: TSV from the provided URL, but fall back to CSV.
+  const delimiter = headerLine.includes("\t") ? "\t" : ",";
+  const headers = headerLine.split(delimiter).map((h) => h.trim());
 
   return dataLines.map((line) => {
-    const cells = line.split(",");
+    const cells = line.split(delimiter);
     const record: Record<string, string> = {};
     headers.forEach((h, i) => {
       record[h] = (cells[i] ?? "").trim();
@@ -36,7 +38,13 @@ function parseCsv(text: string): Record<string, string>[] {
 }
 
 export async function fetchAusExecutives(): Promise<AusExecutive[]> {
-  const url = process.env.NEXT_PUBLIC_AUS_EXEC_CSV_URL ?? process.env.VITE_AUS_EXEC_CSV_URL;
+  const defaultUrl =
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vT3-7MBB3-LziWVdqxPMd5S-FrVDakPBAg1YfZMzLJxYz5toXAqzvBCm_E9_lpxRpqMUbMFWf3gjerG/pub?gid=0&single=true&output=tsv";
+
+  const url =
+    process.env.NEXT_PUBLIC_AUS_EXEC_CSV_URL ??
+    process.env.VITE_AUS_EXEC_CSV_URL ??
+    defaultUrl;
 
   if (!url) {
     console.warn("NEXT_PUBLIC_AUS_EXEC_CSV_URL is not set");
@@ -52,7 +60,7 @@ export async function fetchAusExecutives(): Promise<AusExecutive[]> {
   }
 
   const text = await res.text();
-  const rows = parseCsv(text);
+  const rows = parseTable(text);
 
   // Try to map common header variants based on the provided sheet structure
   return rows
