@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
+import { Link } from 'react-router-dom';
 import { translations } from '../../lib/translations';
 import { useApp } from '../../lib/AppContext';
 import mcgillArtsImage from '../../assets/0dd661c2df700c302313b4e79dabfdf5ed77ee80.png';
@@ -15,6 +16,9 @@ export function AboutPage() {
 
   useEffect(() => {
     let isMounted = true;
+
+    // Reset loading state whenever we re-fetch (e.g. when language changes)
+    setLoadingExecs(true);
 
     fetchAusExecutives()
       .then((data) => {
@@ -89,12 +93,18 @@ export function AboutPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>{t.executiveTeam}</CardTitle>
+            <CardTitle>{language === 'en' ? 'Our History' : 'Notre histoire'}</CardTitle>
+            <CardDescription>
+              {language === 'en'
+                ? 'Learn about previous AUS executive teams and how the society has evolved over time.'
+                : "Découvrez les anciennes équipes exécutives de l’AÉFA et l’évolution de l’association au fil des ans."}
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <p>{t.executiveDesc}</p>
-            <Button variant="outline" className="mt-4 w-full">
-              {t.meetTheTeam}
+            <Button asChild variant="outline" className="mt-4 w-full">
+              <Link to="/past-executives">
+                {language === 'en' ? 'View past executive teams' : 'Voir les anciennes équipes exécutives'}
+              </Link>
             </Button>
           </CardContent>
         </Card>

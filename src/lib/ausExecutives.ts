@@ -46,8 +46,9 @@ export async function fetchAusExecutives(): Promise<AusExecutive[]> {
   const res = await fetch(url);
 
   if (!res.ok) {
-    console.error("Failed to fetch AUS executives CSV", res.status, res.statusText);
-    return [];
+    throw new Error(
+      `Failed to fetch AUS executives CSV: ${res.status} ${res.statusText}`
+    );
   }
 
   const text = await res.text();

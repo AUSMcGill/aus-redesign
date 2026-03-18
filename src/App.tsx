@@ -8,6 +8,9 @@ const AboutPage = lazy(() => import('./components/pages/AboutPage').then((m) => 
 const InvolvementPage = lazy(() => import('./components/pages/InvolvementPage').then((m) => ({ default: m.InvolvementPage })));
 const ResourcesPage = lazy(() => import('./components/pages/ResourcesPage').then((m) => ({ default: m.ResourcesPage })));
 const AcademicsPage = lazy(() => import('./components/pages/AcademicsPage').then((m) => ({ default: m.AcademicsPage })));
+const PastExecutivesPage = lazy(
+  () => import('./components/pages/PastExecutivesPage').then((m) => ({ default: m.PastExecutivesPage }))
+);
 const ContactPage = lazy(() => import('./components/pages/ContactPage').then((m) => ({ default: m.ContactPage })));
 
 function PageFallback() {
@@ -30,6 +33,7 @@ export default function App() {
               <Route path="/involvement" element={<InvolvementPage />} />
               <Route path="/resources" element={<ResourcesPage />} />
               <Route path="/academics" element={<AcademicsPage />} />
+              <Route path="/past-executives" element={<PastExecutivesPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
