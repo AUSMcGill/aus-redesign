@@ -1,8 +1,6 @@
 'use client';
 
-import { useState } from 'react';
-import { useEffect, useMemo, useState } from 'react';
-import type { ReactNode } from 'react';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import {
   Brain,
   Building2,
@@ -27,7 +25,8 @@ import {
   Video,
   X,
 } from 'lucide-react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import Link from 'next/link';
+import { useParams, useRouter } from 'next/navigation';
 import { translations, type Language } from '../../lib/translations';
 import { useApp } from '../../lib/AppContext';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
@@ -379,8 +378,14 @@ function RoomBookingInterface({ language }: { language: Language }) {
 export function ResourcesPage() {
   const { language } = useApp();
   const t = translations[language];
-  const { categorySlug } = useParams<{ categorySlug?: string }>();
-  const navigate = useNavigate();
+  const params = useParams();
+  const router = useRouter();
+  const categorySlug =
+    typeof (params as { categorySlug?: unknown })?.categorySlug === 'string'
+      ? (params as { categorySlug?: string }).categorySlug
+      : typeof (params as { tab?: unknown })?.tab === 'string'
+        ? (params as { tab?: string }).tab
+        : undefined;
 
   const [directory, setDirectory] = useState<ResourcesDirectory | null>(null);
   const [directoryError, setDirectoryError] = useState<string | null>(null);
@@ -1104,7 +1109,7 @@ export function ResourcesPage() {
                     <Button
                       variant={!activeCategoryName ? 'default' : 'outline'}
                       size="sm"
-                      onClick={() => navigate('/resources')}
+                      onClick={() => router.push('/resources')}
                     >
                       {language === 'en' ? 'All categories' : 'Toutes les catégories'}
                     </Button>
@@ -1119,7 +1124,7 @@ export function ResourcesPage() {
                           size="sm"
                           asChild
                         >
-                          <Link to={slug ? `/resources/${slug}` : '/resources'}>{name}</Link>
+                          <Link href={slug ? `/resources/${slug}` : '/resources'}>{name}</Link>
                         </Button>
                       );
                     })}

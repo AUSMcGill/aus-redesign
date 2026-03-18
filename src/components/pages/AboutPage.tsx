@@ -112,6 +112,31 @@ export function AboutPage() {
         </Card>
       </div>
 
+      <Card>
+        <CardHeader>
+          <CardTitle>
+            {language === 'en' ? 'Governance' : 'Gouvernance'}
+          </CardTitle>
+          <CardDescription>
+            {language === 'en'
+              ? 'How the AUS is structured and how decisions are made.'
+              : "Comment l’AÉFA est structurée et comment les décisions sont prises."}
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-3">
+          <p>
+            {language === 'en'
+              ? 'The AUS is a democratically elected student association representing all Arts and Arts & Science undergraduates. Its governance is rooted in a constitution and equity-focused bylaws that define the roles of the Executive, Council, committees, and affiliated associations.'
+              : "L’AÉFA est une association étudiante démocratique qui représente l’ensemble des étudiant·e·s de premier cycle en Arts et en Arts et sciences. Sa gouvernance repose sur une constitution et des règlements axés sur l’équité, qui définissent les rôles de l’exécutif, du conseil, des comités et des associations affiliées."}
+          </p>
+          <p>
+            {language === 'en'
+              ? 'Council meetings, general assemblies, and referenda give members a direct voice in shaping priorities, approving budgets, and holding representatives accountable.'
+              : "Les réunions du conseil, les assemblées générales et les référendums offrent aux membres un moyen direct de définir les priorités, d’approuver les budgets et de demander des comptes à leurs représentant·e·s."}
+          </p>
+        </CardContent>
+      </Card>
+
       <section className="space-y-4">
         <div className="flex items-baseline justify-between gap-2">
           <h2 className="text-xl font-semibold">
@@ -168,6 +193,26 @@ export function AboutPage() {
             ))}
           </div>
         )}
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold">
+          {language === 'en'
+            ? 'Executive Council Office Hours'
+            : 'Heures de bureau du conseil exécutif'}
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          {language === 'en'
+            ? 'View the full, always up-to-date office hours schedule from the Arts Public Directory.'
+            : 'Consultez l’horaire complet et toujours à jour des heures de bureau dans le répertoire public des Arts.'}
+        </p>
+        <div className="w-full rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
+          <iframe
+            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT3-7MBB3-LziWVdqxPMd5S-FrVDakPBAg1YfZMzLJxYz5toXAqzvBCm_E9_lpxRpqMUbMFWf3gjerG/pubhtml?gid=1296473483&single=true&widget=true&headers=false"
+            className="w-full h-[600px]"
+            loading="lazy"
+          />
+        </div>
       </section>
     </div>
   );
