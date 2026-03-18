@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../../src/components/ui/card';
+import { RippleButton } from '../../../src/components/ui/ripple-button';
 
 export const dynamic = 'force-dynamic';
 
@@ -49,11 +50,19 @@ export default async function ResourceSubpage(props: any) {
     headers.find((h) => h.toLowerCase() === 'category') ??
     null;
 
+  const linkKey =
+    headers.find((h) => h.toLowerCase().includes('hyperlink')) ??
+    headers.find((h) => h.toLowerCase() === 'link') ??
+    headers.find((h) => h.toLowerCase().includes('url')) ??
+    null;
+
   const filtered = categoryKey
     ? rows.filter((row) => (row[categoryKey] ?? '').toLowerCase() === normalizedTab)
     : rows;
 
-  const displayRows = filtered.length > 0 ? filtered : rows;
+  // If we can filter by a known category column, respect the filter even when it yields 0 rows
+  // so the empty-state message can show. Only fall back to "all rows" when we can't filter.
+  const displayRows = categoryKey ? filtered : rows;
 
   return (
     <div className="space-y-6">
@@ -82,16 +91,23 @@ export default async function ResourceSubpage(props: any) {
                 {row['Description'] && (
                   <p className="text-xs text-muted-foreground mt-1">{row['Description']}</p>
                 )}
-                {row['Link'] && (
-                  <a
-                    href={row['Link']}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-2 inline-flex text-xs text-primary underline underline-offset-4"
-                  >
-                    Open resource
-                  </a>
-                )}
+                {(() => {
+                  const resourceLink = linkKey
+                    ? row[linkKey]
+                    : row['Link'] ?? row['URL'] ?? row['Website'] ?? '';
+
+                  const trimmed = resourceLink?.trim?.() ? resourceLink.trim() : '';
+                  if (!trimmed) return null;
+
+                  return (
+                    <RippleButton
+                      href={trimmed}
+                      className="mt-2 text-xs px-3 py-1 rounded-md"
+                    >
+                      Open resource
+                    </RippleButton>
+                  );
+                })()}
               </div>
             ))}
           </div>

@@ -1,5 +1,6 @@
 import { ResourcesPage } from '../../src/components/pages/ResourcesPage';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../src/components/ui/card';
+import { RippleButton } from '../../src/components/ui/ripple-button';
 
 interface ResourceRow {
   [key: string]: string;
@@ -24,14 +25,17 @@ function parseCsv(text: string): { headers: string[]; rows: ResourceRow[] } {
   return { headers, rows };
 }
 
-async function getResourcesByTab() {
+async function getResourcesByTab(): Promise<{
+  grouped: Record<string, ResourceRow[]>;
+  linkKey: string | null;
+}> {
   const url =
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vTdYqXi8L_HjdpcpOCwG8tUiXIP5VMRQlHr9uU3FEWfm6ST2DODWTlemCQdcnQQF3LvPBibxJPwx23D/pub?output=csv';
 
   const res = await fetch(url, { cache: 'no-store' });
   if (!res.ok) {
     console.error('Failed to fetch resources CSV', res.status, res.statusText);
-    return {};
+    return { grouped: {}, linkKey: null };
   }
 
   const text = await res.text();
@@ -40,6 +44,12 @@ async function getResourcesByTab() {
   const tabKey =
     headers.find((h) => h.toLowerCase() === 'tab') ??
     headers.find((h) => h.toLowerCase() === 'category') ??
+    null;
+
+  const linkKey =
+    headers.find((h) => h.toLowerCase().includes('hyperlink')) ??
+    headers.find((h) => h.toLowerCase() === 'link') ??
+    headers.find((h) => h.toLowerCase().includes('url')) ??
     null;
 
   const grouped: Record<string, ResourceRow[]> = {};
@@ -53,13 +63,13 @@ async function getResourcesByTab() {
     grouped[tabName].push(row);
   });
 
-  return grouped;
+  return { grouped, linkKey };
 }
 
 export const dynamic = 'force-dynamic';
 
 export default async function Page() {
-  const grouped = await getResourcesByTab();
+  const { grouped, linkKey } = await getResourcesByTab();
   const tabNames = Object.keys(grouped);
 
   return (
@@ -91,11 +101,10 @@ export default async function Page() {
                       row['Resource'] ??
                       `Resource ${idx + 1}`;
                     const description = row['Description'] ?? '';
-                    const link =
-                      row['Link'] ??
-                      row['URL'] ??
-                      row['Website'] ??
-                      '';
+                    const resourceLink = linkKey
+                      ? row[linkKey]
+                      : row['Link'] ?? row['URL'] ?? row['Website'] ?? '';
+                    const trimmed = resourceLink?.trim?.() ? resourceLink.trim() : '';
 
                     return (
                       <div
@@ -108,15 +117,13 @@ export default async function Page() {
                             {description}
                           </p>
                         )}
-                        {link && (
-                          <a
-                            href={link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="mt-2 inline-flex text-xs text-primary underline underline-offset-4"
+                        {trimmed && (
+                          <RippleButton
+                            href={trimmed}
+                            className="mt-2 text-xs px-3 py-1 rounded-md"
                           >
                             Open resource
-                          </a>
+                          </RippleButton>
                         )}
                       </div>
                     );
