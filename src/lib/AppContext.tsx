@@ -13,8 +13,13 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export function AppProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>('en');
   const [darkMode, setDarkMode] = useState(() => {
-    const saved = localStorage.getItem('darkMode');
-    return saved ? JSON.parse(saved) : false;
+    try {
+      const saved = localStorage.getItem('darkMode');
+      if (!saved) return false;
+      return JSON.parse(saved) === true;
+    } catch {
+      return false;
+    }
   });
 
   const toggleLanguage = () => {
@@ -24,7 +29,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const toggleDarkMode = () => {
     setDarkMode((prev: boolean) => {
       const newMode = !prev;
-      localStorage.setItem('darkMode', JSON.stringify(newMode));
+      try {
+        localStorage.setItem('darkMode', JSON.stringify(newMode));
+      } catch {
+        // ignore storage failures (privacy mode, blocked storage, etc.)
+      }
       return newMode;
     });
   };
