@@ -253,7 +253,15 @@ export function HomePage() {
 
         {/* Land Acknowledgement */}
         <div className="py-4 px-6 bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-          <p className="text-base text-gray-600 dark:text-gray-300 text-justify max-w-4xl mx-auto leading-relaxed">{t.landAcknowledgement}</p>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 max-w-4xl mx-auto">
+            {t.landAcknowledgementTitle}
+          </h3>
+          <p className="text-base text-gray-600 dark:text-gray-300 text-justify max-w-4xl mx-auto leading-relaxed mt-3">
+            {t.landAcknowledgementBody1}
+          </p>
+          <p className="text-base text-gray-600 dark:text-gray-300 text-justify max-w-4xl mx-auto leading-relaxed mt-3">
+            {t.landAcknowledgementBody2}
+          </p>
         </div>
       </div>
     </div>

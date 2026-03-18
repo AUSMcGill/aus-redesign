@@ -81,7 +81,9 @@ export const translations = {
     getInvolved: "Get Involved",
     
     // Land Acknowledgement
-    landAcknowledgement: "The SUS and the AUS acknowledge that McGill is on the unceded and unsurrendered territory of the Indigenous People, Kanien'keha:ka (Ga-niyen-ge-haa-ga). This island called Montréal is known as Tio'tia:ke (Gio-Jaw-Gé) in the language of the Kanien'kehá:ka, and it has historically served as a meeting place for many Indigenous nations. Tio'tia:ke operates under the Great Peace of Montréal treaty, which was signed with 39 First Nations.",
+    landAcknowledgementTitle: "Land Acknowledgement",
+    landAcknowledgementBody1: "The Arts Undergraduate Society of McGill University is situated on the traditional territory of the Kanien'kehà:ka (Ga-niyen-ge-HAA-ga), which has long served as a site of meeting and exchange amongst Indigenous peoples, including the Haudenosaunee (Hoh-DEE-noh-SHoh-nee) and Anishinabeg (Ah-nish-ih-nah'-bey) nations. We acknowledge and thank the diverse Indigenous peoples whose presence has shaped and continues to enrich this territory, on which students and scholars from across the world now gather.",
+    landAcknowledgementBody2: "The AUS recognizes that the arts and humanities carry a particular responsibility in the work of truth, reconciliation, and decolonization. In the spirit of McGill's commitments to Indigenous recognition and reconciliation, we pledge to create spaces that center Indigenous voices, histories, and ways of knowing, and to hold ourselves accountable to ongoing learning and meaningful action.",
     
     // About
     aboutTitle: "About the Arts Undergraduate Society",
@@ -370,7 +372,9 @@ export const translations = {
     getInvolved: "S'impliquer",
     
     // Land Acknowledgement
-    landAcknowledgement: "L'AÉUM et l'AÉFA reconnaissent que l'Université McGill est située sur un territoire autochtone qui n'a jamais été cédé, soit celui du peuple Kanien'keha:ka (Ga-niyen-ge-haa-ga). Cette île appelée Montréal est connue sous le nom de Tio'tia:ke (Gio-Jaw-Gé) dans la langue des Kanien'kehá:ka, et elle a toujours servi de lieu de rencontre pour plusieurs nations autochtones. Tio'tia:ke est régie par la Grande Paix de Montréal, un traité signé avec 39 Premières Nations.",
+    landAcknowledgementTitle: "Reconnaissance du territoire",
+    landAcknowledgementBody1: "L'Association étudiante de la faculté des arts de l'Université McGill se trouve sur le territoire traditionnel de la nation Kanien'kehà:ka (ga-niyen-gue-haa-ga), qui a longtemps servi de lieu de rencontre et d'échange aux peuples autochtones, notamment les Haudenosaunees (ho-di-no-cho-ni) et les Anishinaabeg (ah-ni-chi-na-bê). Nous saluons et remercions les divers peuples autochtones dont la présence a façonné et continue d'enrichir ce territoire, où se rassemblent aujourd'hui des étudiant·e·s et des chercheur·se·s du monde entier.",
+    landAcknowledgementBody2: "L'Association étudiante de la faculté des arts reconnaît que les arts et les sciences humaines ont une responsabilité particulière dans le travail de vérité, de réconciliation et de décolonisation. Dans l'esprit des engagements de McGill envers la reconnaissance et la réconciliation avec les peuples autochtones, nous nous engageons à créer des espaces qui mettent de l'avant les voix, les histoires et les savoirs autochtones, et à nous tenir responsables d'un apprentissage continu et d'actions concrètes.",
     
     // About
     aboutTitle: "À propos de l'AÉFA",

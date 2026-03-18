@@ -51,6 +51,15 @@ export function Layout({ children }: LayoutProps) {
                 </ul>
               </div>
             </div>
+            <div className="border-t border-gray-700 dark:border-gray-800 pt-6">
+              <h3 className="text-base md:text-lg text-white">{t.landAcknowledgementTitle}</h3>
+              <p className="mt-3 text-sm text-gray-300 dark:text-gray-400 leading-relaxed">
+                {t.landAcknowledgementBody1}
+              </p>
+              <p className="mt-3 text-sm text-gray-300 dark:text-gray-400 leading-relaxed">
+                {t.landAcknowledgementBody2}
+              </p>
+            </div>
             <div className="border-t border-gray-700 dark:border-gray-800 pt-6 text-center text-sm text-gray-400 dark:text-gray-500">
               <p>{t.footerCopyright}</p>
             </div>
