@@ -1,5 +1,5 @@
-import { ResourcesPage } from '../src/components/pages/ResourcesPage';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../src/components/ui/card';
+import { ResourcesPage } from '../../src/components/pages/ResourcesPage';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../src/components/ui/card';
 
 interface ResourceRow {
   [key: string]: string;

@@ -37,10 +37,12 @@ function parseCsv(text: string): ResourcesDirectory {
 }
 
 export async function fetchResourcesDirectory(): Promise<ResourcesDirectory> {
-  const url = import.meta.env.VITE_AUS_RESOURCES_CSV_URL as string | undefined;
+  const url =
+    (process.env.NEXT_PUBLIC_AUS_RESOURCES_CSV_URL as string | undefined) ??
+    (process.env.VITE_AUS_RESOURCES_CSV_URL as string | undefined);
 
   if (!url) {
-    console.warn('VITE_AUS_RESOURCES_CSV_URL is not set');
+    console.warn("NEXT_PUBLIC_AUS_RESOURCES_CSV_URL is not set");
     return { headers: [], rows: [] };
   }
 

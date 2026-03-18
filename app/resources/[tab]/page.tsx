@@ -38,8 +38,8 @@ async function getResources(): Promise<{ headers: string[]; rows: ResourceRow[] 
   return parseCsv(text);
 }
 
-export default async function ResourceSubpage({ params }: { params: { tab: string } }) {
-  const { tab } = params;
+export default async function ResourceSubpage(props: any) {
+  const tab: string = typeof props?.params?.tab === 'string' ? props.params.tab : '';
   const { headers, rows } = await getResources();
 
   // Try to filter by a "Tab" or "Category" column if present; otherwise show all rows.
