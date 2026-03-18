@@ -36,10 +36,10 @@ function parseCsv(text: string): Record<string, string>[] {
 }
 
 export async function fetchAusExecutives(): Promise<AusExecutive[]> {
-  const url = import.meta.env.VITE_AUS_EXEC_CSV_URL as string | undefined;
+  const url = process.env.NEXT_PUBLIC_AUS_EXEC_CSV_URL ?? process.env.VITE_AUS_EXEC_CSV_URL;
 
   if (!url) {
-    console.warn("VITE_AUS_EXEC_CSV_URL is not set");
+    console.warn("NEXT_PUBLIC_AUS_EXEC_CSV_URL is not set");
     return [];
   }
 

@@ -101,7 +101,9 @@ export function parsePastExecutivesCsv(text: string): PastExecutiveYear[] {
 
 export async function fetchPastExecutives(): Promise<PastExecutiveYear[]> {
   const url =
-    (import.meta.env.VITE_AUS_PAST_EXECS_CSV_URL as string | undefined) ?? FALLBACK_URL;
+    process.env.NEXT_PUBLIC_AUS_PAST_EXECS_CSV_URL ??
+    process.env.VITE_AUS_PAST_EXECS_CSV_URL ??
+    FALLBACK_URL;
 
   const res = await fetch(url);
   if (!res.ok) {

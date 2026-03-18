@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import type { ReactNode } from 'react';
 import {
@@ -151,7 +153,11 @@ function RoomBookingInterface({ language }: { language: Language }) {
 
   return (
     <div className="space-y-6">
-      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as 'book' | 'my-bookings')} className="w-full">
+      <Tabs
+        value={activeTab}
+        onValueChange={(v: string) => setActiveTab(v as 'book' | 'my-bookings')}
+        className="w-full"
+      >
         <TabsList className="grid w-full grid-cols-2 mb-6">
           <TabsTrigger value="book">{t.roomBookingBookRoom}</TabsTrigger>
           <TabsTrigger value="my-bookings">{t.roomBookingMyBookings}</TabsTrigger>
@@ -200,7 +206,7 @@ function RoomBookingInterface({ language }: { language: Language }) {
                         mode="single"
                         selected={selectedDate}
                         onSelect={setSelectedDate}
-                        disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                        disabled={(date: Date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
                         initialFocus
                       />
                     </PopoverContent>

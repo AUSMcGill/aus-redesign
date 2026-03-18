@@ -26,7 +26,7 @@ A modern, bilingual (English/French) website for the Arts Undergraduate Society 
 - **Styling**: Tailwind CSS v4.0
 - **UI Components**: shadcn/ui
 - **Icons**: Lucide React
-- **Build Tool**: Vite (assumed)
+- **Framework runtime**: Next.js (App Router)
 
 ## Project Structure
 
@@ -80,7 +80,7 @@ yarn dev
 pnpm dev
 ```
 
-4. Open your browser and navigate to `http://localhost:5173` (or the port shown in your terminal)
+4. Open your browser and navigate to `http://localhost:3000` (or the port shown in your terminal)
 
 ## Customization
 

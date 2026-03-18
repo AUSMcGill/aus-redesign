@@ -1,7 +1,9 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { translations } from '../../lib/translations';
 import { useApp } from '../../lib/AppContext';
 import mcgillArtsImage from '../../assets/0dd661c2df700c302313b4e79dabfdf5ed77ee80.png';
@@ -57,7 +59,7 @@ export function AboutPage() {
           </p>
           <div className="relative h-64 rounded-lg overflow-hidden">
             <img
-              src={mcgillArtsImage}
+              src={mcgillArtsImage.src}
               alt={language === 'en' ? 'McGill Arts Building in Fall' : 'Bâtiment des Arts de McGill en automne'}
               className="w-full h-full object-cover"
               loading="lazy"
@@ -102,7 +104,7 @@ export function AboutPage() {
           </CardHeader>
           <CardContent>
             <Button asChild variant="outline" className="mt-4 w-full">
-              <Link to="/past-executives">
+              <Link href="/past-executives">
                 {language === 'en' ? 'View past executive teams' : 'Voir les anciennes équipes exécutives'}
               </Link>
             </Button>

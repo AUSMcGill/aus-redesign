@@ -1,4 +1,7 @@
-import { Link, useLocation } from 'react-router-dom';
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Button } from './ui/button';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { BookOpen, Users, FileText, Calendar, Mail, Home, Languages, Moon, Sun, Menu } from 'lucide-react';
@@ -16,7 +19,7 @@ import { useApp } from '../lib/AppContext';
 
 export function Header() {
   const { language, darkMode, toggleLanguage, toggleDarkMode } = useApp();
-  const location = useLocation();
+  const pathname = usePathname();
   const t = translations[language];
 
   const navItems = [
@@ -32,9 +35,9 @@ export function Header() {
     <header className="bg-white dark:bg-gray-800 text-red-700 dark:text-red-400 shadow-lg border-b-4 border-red-700 dark:border-red-600">
       <div className="container mx-auto px-4 py-6">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-4 hover:opacity-80 transition-opacity cursor-pointer">
+          <Link href="/" className="flex items-center gap-4 hover:opacity-80 transition-opacity cursor-pointer">
             <ImageWithFallback
-              src={ausLogo}
+              src={ausLogo.src}
               alt="AUS Logo"
               className="h-16 w-16 md:h-20 md:w-20 object-contain"
               loading="eager"
@@ -62,11 +65,11 @@ export function Header() {
               <DropdownMenuContent align="end" className="w-72">
                 <DropdownMenuLabel className="text-red-700 dark:text-red-400">Navigation</DropdownMenuLabel>
                 {navItems.map(({ path, label, icon: Icon }) => {
-                  const isActive = location.pathname === path;
+                  const isActive = pathname === path;
                   return (
                     <DropdownMenuItem key={path} asChild>
                       <Link
-                        to={path}
+                        href={path}
                         className={`flex items-center gap-3 cursor-pointer py-3 ${
                           isActive ? 'bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-400' : ''
                         }`}
