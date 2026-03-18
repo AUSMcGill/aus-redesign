@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import {
   Brain,
@@ -24,6 +24,7 @@ import {
   Video,
   X,
 } from 'lucide-react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { translations, type Language } from '../../lib/translations';
 import { useApp } from '../../lib/AppContext';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
@@ -36,6 +37,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import { Textarea } from '../ui/textarea';
+import { fetchResourcesDirectory, type ResourcesDirectory } from '../../lib/resourcesDirectory';
 
 interface FoodOption {
   name: string;
@@ -370,6 +372,85 @@ function RoomBookingInterface({ language }: { language: Language }) {
 export function ResourcesPage() {
   const { language } = useApp();
   const t = translations[language];
+  const { categorySlug } = useParams<{ categorySlug?: string }>();
+  const navigate = useNavigate();
+
+  const [directory, setDirectory] = useState<ResourcesDirectory | null>(null);
+  const [directoryError, setDirectoryError] = useState<string | null>(null);
+  const [loadingDirectory, setLoadingDirectory] = useState<boolean>(true);
+
+  useEffect(() => {
+    let isMounted = true;
+    setLoadingDirectory(true);
+
+    fetchResourcesDirectory()
+      .then((data) => {
+        if (!isMounted) return;
+        setDirectory(data);
+        setDirectoryError(null);
+      })
+      .catch(() => {
+        if (!isMounted) return;
+        setDirectory(null);
+        setDirectoryError(
+          language === 'en'
+            ? 'We were unable to load the resources directory at this time.'
+            : "Nous n’avons pas pu charger l’annuaire des ressources pour le moment."
+        );
+      })
+      .finally(() => {
+        if (!isMounted) return;
+        setLoadingDirectory(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [language]);
+
+  const categoryHeader = useMemo(() => {
+    if (!directory || !directory.headers.length) return null;
+    const lower = directory.headers.map((h) => h.toLowerCase());
+    const idx = lower.findIndex((h) => h.includes('category'));
+    return idx >= 0 ? directory.headers[idx] : null;
+  }, [directory]);
+
+  const categories = useMemo(() => {
+    if (!directory || !categoryHeader) return [];
+    const set = new Set<string>();
+    directory.rows.forEach((row) => {
+      const value = row[categoryHeader];
+      if (value && value.trim().length > 0) {
+        set.add(value.trim());
+      }
+    });
+    return Array.from(set).sort();
+  }, [directory, categoryHeader]);
+
+  const categorySlugMap = useMemo(() => {
+    return new Map(
+      categories.map((name) => [
+        name
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, ''),
+        name
+      ])
+    );
+  }, [categories]);
+
+  const activeCategoryName = useMemo(() => {
+    if (!categorySlug) return null;
+    return categorySlugMap.get(categorySlug) ?? null;
+  }, [categorySlug, categorySlugMap]);
+
+  const filteredRows = useMemo(() => {
+    if (!directory) return [];
+    if (!categoryHeader || !activeCategoryName) return directory.rows;
+    return directory.rows.filter(
+      (row) => row[categoryHeader] && row[categoryHeader].trim() === activeCategoryName
+    );
+  }, [directory, categoryHeader, activeCategoryName]);
 
   const onCampusFoodOptions: FoodOption[] = [
     {
@@ -978,6 +1059,117 @@ export function ResourcesPage() {
 
   return (
     <div className="space-y-6">
+      {/* Live Resources Directory (CSV-driven) */}
+      <Accordion type="multiple" className="w-full space-y-4">
+        <AccordionItem value="resources-directory" className="border rounded-lg px-6 py-4">
+          <AccordionTrigger className="hover:no-underline py-0">
+            <div className="flex flex-col items-start gap-1 w-full">
+              <CardTitle className="flex items-center gap-2 text-left">
+                <MapPin className="w-6 h-6 text-red-600" />
+                {language === 'en'
+                  ? 'McGill Student Resources Masterlist (Live)'
+                  : 'Répertoire des ressources étudiantes de McGill (en direct)'}
+              </CardTitle>
+              <CardDescription className="text-left">
+                {language === 'en'
+                  ? 'Browse the full resources masterlist sourced live from the AUS Google Sheet.'
+                  : "Consultez la liste complète des ressources, chargée en direct à partir de la feuille Google de l’AÉPCA."}
+              </CardDescription>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent className="pt-4 space-y-4">
+            {loadingDirectory && (
+              <p className="text-sm text-muted-foreground">
+                {language === 'en'
+                  ? 'Loading resources directory…'
+                  : 'Chargement de l’annuaire des ressources…'}
+              </p>
+            )}
+
+            {!loadingDirectory && directoryError && (
+              <p className="text-sm text-destructive">{directoryError}</p>
+            )}
+
+            {!loadingDirectory && directory && directory.headers.length > 0 && (
+              <>
+                {categories.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <Button
+                      variant={!activeCategoryName ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => navigate('/resources')}
+                    >
+                      {language === 'en' ? 'All categories' : 'Toutes les catégories'}
+                    </Button>
+                    {categories.map((name) => {
+                      const slug = Array.from(categorySlugMap.entries()).find(
+                        ([, value]) => value === name
+                      )?.[0];
+                      return (
+                        <Button
+                          key={name}
+                          variant={activeCategoryName === name ? 'default' : 'outline'}
+                          size="sm"
+                          asChild
+                        >
+                          <Link to={slug ? `/resources/${slug}` : '/resources'}>{name}</Link>
+                        </Button>
+                      );
+                    })}
+                  </div>
+                )}
+
+                <div className="w-full overflow-x-auto border rounded-lg">
+                  <table className="min-w-full text-sm">
+                    <thead className="bg-muted">
+                      <tr>
+                        {directory.headers.map((h) => (
+                          <th
+                            key={h}
+                            className="px-3 py-2 text-left font-semibold text-xs uppercase tracking-wide text-muted-foreground"
+                          >
+                            {h}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredRows.map((row, idx) => (
+                        <tr key={idx} className="border-t">
+                          {directory.headers.map((h) => (
+                            <td key={h} className="px-3 py-2 align-top">
+                              {row[h]}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                      {!filteredRows.length && (
+                        <tr>
+                          <td
+                            colSpan={directory.headers.length}
+                            className="px-3 py-4 text-center text-sm text-muted-foreground"
+                          >
+                            {language === 'en'
+                              ? 'No resources found for this category.'
+                              : 'Aucune ressource trouvée pour cette catégorie.'}
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+
+                <p className="text-xs text-muted-foreground mt-2">
+                  {language === 'en'
+                    ? 'Data sourced from the AUS McGill Student Resources Masterlist Google Sheet.'
+                    : "Données provenant de la feuille Google « McGill Student Resources Masterlist » de l’AÉPCA."}
+                </p>
+              </>
+            )}
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+
       {/* Food Options and Student Discounts Sections */}
       <Accordion type="multiple" className="w-full space-y-4">
         {/* Food Options Section */}
