@@ -9,7 +9,20 @@ function parseCsv(text: string): Record<string, string>[] {
   const lines = text.split(/\r?\n/).filter((line) => line.trim().length > 0);
   if (lines.length === 0) return [];
 
-  const [headerLine, ...dataLines] = lines;
+  // The published CSV includes a directory section before the actual table.
+  // Find the first row that looks like the AUS Executive Council header.
+  const headerIndex = lines.findIndex((line) => {
+    const lower = line.toLowerCase();
+    return lower.includes("position") && lower.includes("name") && lower.includes("email");
+  });
+
+  if (headerIndex === -1 || headerIndex === lines.length - 1) {
+    return [];
+  }
+
+  const headerLine = lines[headerIndex];
+  const dataLines = lines.slice(headerIndex + 1);
+
   const headers = headerLine.split(",").map((h) => h.trim());
 
   return dataLines.map((line) => {
