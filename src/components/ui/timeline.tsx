@@ -1,5 +1,6 @@
 import { useScroll, useTransform, motion } from 'framer-motion';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useApp } from '../../lib/AppContext';
 
 interface TimelineEntry {
   title: string;
@@ -10,6 +11,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
+  const { language } = useApp();
 
   useEffect(() => {
     if (ref.current) {
@@ -30,10 +32,12 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
     <div className="w-full bg-white dark:bg-neutral-950 font-sans md:px-10" ref={containerRef}>
       <div className="max-w-7xl mx-auto py-14 px-4 md:px-8 lg:px-10">
         <h2 className="text-lg md:text-4xl mb-4 text-black dark:text-white max-w-4xl">
-          AUS leadership through the years
+          {language === 'en' ? 'AUS leadership through the years' : "Leadership de l'AÉFA au fil des ans"}
         </h2>
         <p className="text-neutral-700 dark:text-neutral-300 text-sm md:text-base max-w-2xl">
-          Past AUS executive teams, sourced live from the AUS public directory.
+          {language === 'en'
+            ? 'Past AUS executive teams, sourced live from the AUS public directory.'
+            : "Anciennes équipes exécutives de l'AÉFA, tirées en direct de l'annuaire public de l'AÉFA."}
         </p>
       </div>
 

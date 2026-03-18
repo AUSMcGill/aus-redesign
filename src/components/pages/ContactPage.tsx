@@ -180,12 +180,12 @@ export function ContactPage() {
       <Card className="mt-6">
         <CardHeader>
           <CardTitle>
-            {language === 'en' ? 'AUS Contact Directory' : 'Répertoire de contacts de l\'AÉPCA'}
+            {language === 'en' ? 'AUS Contact Directory' : 'Répertoire de contacts de l\'AÉFA'}
           </CardTitle>
           <CardDescription>
             {language === 'en' 
               ? 'Find contact information for all AUS team members' 
-              : 'Trouvez les coordonnées de tous les membres de l\'équipe de l\'AÉPCA'}
+              : 'Trouvez les coordonnées de tous les membres de l\'équipe de l\'AÉFA'}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -193,7 +193,7 @@ export function ContactPage() {
             <iframe
               src="https://docs.google.com/spreadsheets/d/17pjC68uqtG2ziZ9LCGqNI9mdPgpBBQtuGRyhoIcOPD0/htmlembed?gid=2046566544&single=true&widget=false&headers=false&chrome=false"
               className="w-full h-full"
-              title={language === 'en' ? 'AUS Contact Directory' : 'Répertoire de contacts de l\'AÉPCA'}
+              title={language === 'en' ? 'AUS Contact Directory' : 'Répertoire de contacts de l\'AÉFA'}
             />
           </div>
         </CardContent>

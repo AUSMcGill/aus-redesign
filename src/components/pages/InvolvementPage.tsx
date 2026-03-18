@@ -95,7 +95,7 @@ export function InvolvementPage() {
               height="600"
               frameBorder="0"
               scrolling="no"
-              title="AUS Events Calendar"
+              title={t.calendarTitle}
             ></iframe>
           </div>
           <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">

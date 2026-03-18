@@ -292,11 +292,11 @@ export const translations = {
   },
   fr: {
     // Header
-    headerTitle: "Association des Étudiants de Premier Cycle en Arts",
+    headerTitle: "Association Étudiante de la Faculté des Arts à l'Université McGill",
     headerSubtitle: "Université McGill",
     
     // Hero
-    heroTitle: "Bienvenue à l'AÉPCA",
+    heroTitle: "Bienvenue à l'AÉFA",
     heroSubtitle: "Au service des étudiants en Arts depuis 1908",
     
     // Navigation
@@ -315,7 +315,7 @@ export const translations = {
     quickStudyResources: "Ressources d'étude",
     quickStudyResourcesDesc: "Accédez aux guides et au tutorat",
     quickContactUs: "Nous contacter",
-    quickContactUsDesc: "Contactez l'équipe de l'AÉPCA",
+    quickContactUsDesc: "Contactez l'équipe de l'AÉFA",
     viewCalendar: "Voir le calendrier",
     applyNow: "Postuler maintenant",
     browse: "Parcourir",
@@ -324,7 +324,7 @@ export const translations = {
     // Announcements
     latestAnnouncements: "Dernières annonces",
     announcement1Title: "Élections d'automne ouvertes",
-    announcement1Desc: "Les nominations sont maintenant ouvertes pour les postes du conseil de l'AÉPCA. Faites entendre votre voix!",
+    announcement1Desc: "Les nominations sont maintenant ouvertes pour les postes du conseil de l'AÉFA. Faites entendre votre voix!",
     announcement1Date: "Publié le 15 octobre 2025",
     announcement2Title: "Nouveaux services de tutorat",
     announcement2Desc: "Tutorat gratuit maintenant disponible pour plus de 20 cours en Arts. Réservez votre session dès aujourd'hui.",
@@ -336,7 +336,7 @@ export const translations = {
     
     // Events
     upcomingEvents: "Événements à venir",
-    event1Title: "Bal d'automne de l'AÉPCA",
+    event1Title: "Bal d'automne de l'AÉFA",
     event1Desc: "Rejoignez-nous pour une soirée de dîner, danse et célébration",
     event1Time: "19h00 • Salle Redpath",
     event2Title: "Soirée de réseautage professionnel",
@@ -365,17 +365,17 @@ export const translations = {
     
     // Welcome
     welcomeTitle: "Bienvenue aux étudiants en Arts!",
-    welcomeDesc: "L'Association des Étudiants de Premier Cycle en Arts est votre gouvernement étudiant, représentant tous les étudiants de premier cycle de la Faculté des Arts. Nous sommes là pour soutenir votre parcours académique, défendre vos droits et créer des expériences mémorables tout au long de votre séjour à McGill.",
-    learnMore: "En savoir plus sur l'AÉPCA",
+    welcomeDesc: "L'Association Étudiante de la Faculté des Arts à l'Université McGill (AÉFA) est votre gouvernement étudiant, représentant tous les étudiants de premier cycle de la Faculté des Arts. Nous sommes là pour soutenir votre parcours académique, défendre vos droits et créer des expériences mémorables tout au long de votre séjour à McGill.",
+    learnMore: "En savoir plus sur l'AÉFA",
     getInvolved: "S'impliquer",
     
     // Land Acknowledgement
-    landAcknowledgement: "L'AÉUM et l'AÉPCA reconnaissent que l'Université McGill est située sur un territoire autochtone qui n'a jamais été cédé, soit celui du peuple Kanien'keha:ka (Ga-niyen-ge-haa-ga). Cette île appelée Montréal est connue sous le nom de Tio'tia:ke (Gio-Jaw-Gé) dans la langue des Kanien'kehá:ka, et elle a toujours servi de lieu de rencontre pour plusieurs nations autochtones. Tio'tia:ke est régie par la Grande Paix de Montréal, un traité signé avec 39 Premières Nations.",
+    landAcknowledgement: "L'AÉUM et l'AÉFA reconnaissent que l'Université McGill est située sur un territoire autochtone qui n'a jamais été cédé, soit celui du peuple Kanien'keha:ka (Ga-niyen-ge-haa-ga). Cette île appelée Montréal est connue sous le nom de Tio'tia:ke (Gio-Jaw-Gé) dans la langue des Kanien'kehá:ka, et elle a toujours servi de lieu de rencontre pour plusieurs nations autochtones. Tio'tia:ke est régie par la Grande Paix de Montréal, un traité signé avec 39 Premières Nations.",
     
     // About
-    aboutTitle: "À propos de l'Association des Étudiants de Premier Cycle en Arts",
+    aboutTitle: "À propos de l'AÉFA",
     aboutSubtitle: "Représentant plus de 4 000 étudiants en Arts à McGill",
-    aboutDesc: "L'Association des Étudiants de Premier Cycle en Arts (AÉPCA) est le gouvernement étudiant officiel représentant tous les étudiants de premier cycle de la Faculté des Arts de l'Université McGill. Nous nous engageons à améliorer l'expérience académique, sociale et culturelle des étudiants en Arts.",
+    aboutDesc: "L'Association Étudiante de la Faculté des Arts à l'Université McGill (AÉFA) est le gouvernement étudiant officiel représentant tous les étudiants de premier cycle de la Faculté des Arts. Nous nous engageons à améliorer l'expérience académique, sociale et culturelle des étudiants en Arts.",
     ourMission: "Notre mission",
     missionDesc: "Défendre les intérêts des étudiants en Arts, fournir des services essentiels et créer une communauté dynamique grâce au soutien académique et aux événements sociaux.",
     ourValues: "Nos valeurs",
@@ -388,9 +388,9 @@ export const translations = {
     meetTheTeam: "Rencontrer l'équipe",
     
     // Involvement
-    involvementTitle: "Impliquez-vous avec l'AÉPCA",
+    involvementTitle: "Impliquez-vous avec l'AÉFA",
     involvementSubtitle: "Rejoignez-nous et faites la différence dans la communauté des Arts",
-    involvementDesc: "Il existe de nombreuses façons de s'impliquer avec l'AÉPCA! Que vous souhaitiez vous présenter à un poste exécutif, rejoindre un comité ou participer à nos événements, nous accueillons tous les étudiants en Arts.",
+    involvementDesc: "Il existe de nombreuses façons de s'impliquer avec l'AÉFA! Que vous souhaitiez vous présenter à un poste exécutif, rejoindre un comité ou participer à nos événements, nous accueillons tous les étudiants en Arts.",
     committees: "Comités",
     committee1: "Affaires académiques",
     committee1Desc: "Défendre les politiques académiques et les droits des étudiants",
@@ -407,9 +407,9 @@ export const translations = {
     opportunity2Desc: "Ouvert toute l'année - Postulez à tout moment",
     opportunity3: "Programmes de bénévolat",
     opportunity3Desc: "Aidez lors d'événements et d'initiatives",
-    calendarTitle: "Calendrier des événements de l'AÉPCA",
-    calendarDesc: "Restez à jour avec tous les événements et dates importantes de l'AÉPCA",
-    calendarNote: "Remarque : Il s'agit d'un calendrier d'exemple. L'AÉPCA devra le remplacer par le code d'intégration de son calendrier Google réel. Pour obtenir votre code d'intégration de calendrier, accédez aux paramètres de votre calendrier Google, sélectionnez le calendrier à partager et copiez le code d'intégration de la section « Intégrer le calendrier ».",
+    calendarTitle: "Calendrier des événements de l'AÉFA",
+    calendarDesc: "Restez à jour avec tous les événements et dates importantes de l'AÉFA",
+    calendarNote: "Remarque : Il s'agit d'un calendrier d'exemple. L'AÉFA devra le remplacer par le code d'intégration de son calendrier Google réel. Pour obtenir votre code d'intégration de calendrier, accédez aux paramètres de votre calendrier Google, sélectionnez le calendrier à partager et copiez le code d'intégration de la section « Intégrer le calendrier ».",
     
     // Resources
     resourcesTitle: "Ressources pour les étudiants",
@@ -422,10 +422,10 @@ export const translations = {
     resource3Desc: "Connectez-vous avec des ressources de bien-être et des services de soutien.",
     resource4: "Services de carrière",
     resource4Desc: "Rédaction de CV, stages et assistance à la planification de carrière.",
-    resource5: "Documents de l'AÉPCA",
+    resource5: "Documents de l'AÉFA",
     resource5Desc: "Constitution, règlements, procès-verbaux et documents officiels.",
     resource6: "Calendrier des événements",
-    resource6Desc: "Restez informé des événements, échéances et activités de l'AÉPCA.",
+    resource6Desc: "Restez informé des événements, échéances et activités de l'AÉFA.",
     viewResources: "Voir les ressources",
     browseGuides: "Parcourir les guides",
     getSupport: "Obtenir du soutien",
@@ -472,7 +472,7 @@ export const translations = {
     studySpacesAddress: "Adresse",
     studySpacesCapacity: "Capacité approximative",
     studySpacesProximity: "Proximité du campus",
-    studySpacesDeptNote: "Veuillez noter que pour accéder à ces salons, vous devez être un étudiant associé au département qu'ils représentent. Notez également que certains de ces espaces peuvent être verrouillés en dehors des heures d'ouverture des exécutifs. Vous devriez rester à jour en suivant leurs médias sociaux et en vous inscrivant à leurs listes de diffusion - Tous les liens peuvent être trouvés dans l'annuaire public de l'AÉPCA",
+    studySpacesDeptNote: "Veuillez noter que pour accéder à ces salons, vous devez être un étudiant associé au département qu'ils représentent. Notez également que certains de ces espaces peuvent être verrouillés en dehors des heures d'ouverture des exécutifs. Vous devriez rester à jour en suivant leurs médias sociaux et en vous inscrivant à leurs listes de diffusion - Tous les liens peuvent être trouvés dans l'annuaire public de l'AÉFA",
     
     // Room Booking
     roomBookingTitle: "Réservation de salles McGill",
@@ -577,6 +577,6 @@ export const translations = {
     facultyOfArts: "Faculté des Arts",
     ssmu: "AÉUM",
     footerResources: "Ressources",
-    footerCopyright: "© 2025 Association des Étudiants de Premier Cycle en Arts, Université McGill. Tous droits réservés.",
+    footerCopyright: "© 2025 Association Étudiante de la Faculté des Arts à l'Université McGill (AÉFA). Tous droits réservés.",
   }
 };

@@ -13,7 +13,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuLabel,
 } from './ui/dropdown-menu';
-import ausLogo from '../assets/d06d6acabec83a5b5d33976ef83c79eba8569e6a.png';
+import ausLogoEn from '../assets/d06d6acabec83a5b5d33976ef83c79eba8569e6a.png';
+import aefaLogoFr from '../assets/aefa-logo.png';
 import { translations } from '../lib/translations';
 import { useApp } from '../lib/AppContext';
 
@@ -37,8 +38,8 @@ export function Header() {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-4 hover:opacity-80 transition-opacity cursor-pointer">
             <ImageWithFallback
-              src={ausLogo.src}
-              alt="AUS Logo"
+              src={language === 'fr' ? aefaLogoFr.src : ausLogoEn.src}
+              alt={language === 'fr' ? 'AÉFA Logo' : 'AUS Logo'}
               className="h-16 w-16 md:h-20 md:w-20 object-contain"
               loading="eager"
               decoding="async"

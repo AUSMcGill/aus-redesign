@@ -1085,7 +1085,7 @@ export function ResourcesPage() {
               <CardDescription className="text-left">
                 {language === 'en'
                   ? 'Browse the full resources masterlist sourced live from the AUS Google Sheet.'
-                  : "Consultez la liste complète des ressources, chargée en direct à partir de la feuille Google de l’AÉPCA."}
+                  : "Consultez la liste complète des ressources, chargée en direct à partir de la feuille Google de l’AÉFA."}
               </CardDescription>
             </div>
           </AccordionTrigger>
@@ -1174,7 +1174,7 @@ export function ResourcesPage() {
                 <p className="text-xs text-muted-foreground mt-2">
                   {language === 'en'
                     ? 'Data sourced from the AUS McGill Student Resources Masterlist Google Sheet.'
-                    : "Données provenant de la feuille Google « McGill Student Resources Masterlist » de l’AÉPCA."}
+                    : "Données provenant de la feuille Google « McGill Student Resources Masterlist » de l’AÉFA."}
                 </p>
               </>
             )}
