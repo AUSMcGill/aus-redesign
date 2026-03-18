@@ -95,15 +95,18 @@ async function getListservRows(): Promise<ListservRow[]> {
       const frequency = (row[5] ?? '').trim();
       const links = row.flatMap((cell) => extractUrls(cell));
 
-      return {
+      const normalized: ListservRow = {
         name,
-        submissionMethod: submissionMethod || undefined,
-        submissionDeadline: submissionDeadline || undefined,
-        frequency: frequency || undefined,
         links,
-      } satisfies ListservRow;
+      };
+
+      if (submissionMethod) normalized.submissionMethod = submissionMethod;
+      if (submissionDeadline) normalized.submissionDeadline = submissionDeadline;
+      if (frequency) normalized.frequency = frequency;
+
+      return normalized;
     })
-    .filter((row): row is ListservRow => Boolean(row));
+    .filter((row): row is ListservRow => row !== null);
 }
 
 export default async function DepartmentalListservPage() {
