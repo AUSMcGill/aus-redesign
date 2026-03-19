@@ -226,7 +226,7 @@ export function AboutPage() {
           <iframe
             title={language === 'en' ? 'AUS Executive Council Office Hours' : 'Heures de bureau du conseil exécutif'}
             src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT3-7MBB3-LziWVdqxPMd5S-FrVDakPBAg1YfZMzLJxYz5toXAqzvBCm_E9_lpxRpqMUbMFWf3gjerG/pubhtml?gid=1296473483&single=true&widget=true&headers=false"
-            className="w-full h-[85vh] min-h-[900px]"
+            className="w-full h-[1200px] md:h-[1400px]"
             loading="lazy"
           />
         </div>

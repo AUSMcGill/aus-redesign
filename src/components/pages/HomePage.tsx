@@ -17,8 +17,6 @@ export function HomePage({ announcements = [] }: HomePageProps) {
   const { language } = useApp();
   const t = translations[language];
   const latestAnnouncements = announcements.slice(0, 3);
-  const whiteCardButtonClass =
-    'bg-white text-gray-900 border-gray-200 hover:bg-gray-100 dark:bg-white dark:text-gray-900 dark:border-gray-300 dark:hover:bg-gray-100';
 
   return (
     <div>
@@ -50,7 +48,7 @@ export function HomePage({ announcements = [] }: HomePageProps) {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-red-50 mb-3">{t.quickUpcomingEventsDesc}</p>
-              <Button variant="secondary" size="sm" className={`w-full ${whiteCardButtonClass}`}>{t.viewCalendar}</Button>
+              <Button variant="secondary" size="sm" className="w-full">{t.viewCalendar}</Button>
             </CardContent>
           </Card>
 
@@ -61,7 +59,7 @@ export function HomePage({ announcements = [] }: HomePageProps) {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-red-50 mb-3">{t.quickJoinCommitteeDesc}</p>
-              <Button variant="secondary" size="sm" className={`w-full ${whiteCardButtonClass}`}>{t.browse}</Button>
+              <Button variant="secondary" size="sm" className="w-full">{t.browse}</Button>
             </CardContent>
           </Card>
 
@@ -72,7 +70,7 @@ export function HomePage({ announcements = [] }: HomePageProps) {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-red-50 mb-3">{t.quickStudyResourcesDesc}</p>
-              <Button variant="secondary" size="sm" className={`w-full ${whiteCardButtonClass}`}>
+              <Button variant="secondary" size="sm" className="w-full">
                 {language === 'en' ? 'Open directory' : 'Ouvrir l’annuaire'}
               </Button>
             </CardContent>
@@ -85,7 +83,7 @@ export function HomePage({ announcements = [] }: HomePageProps) {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-red-50 mb-3">{t.quickContactUsDesc}</p>
-              <Button variant="secondary" size="sm" className={`w-full ${whiteCardButtonClass}`}>
+              <Button variant="secondary" size="sm" className="w-full">
                 {language === 'en' ? 'See governance' : 'Voir la gouvernance'}
               </Button>
             </CardContent>
@@ -137,7 +135,7 @@ export function HomePage({ announcements = [] }: HomePageProps) {
                   </p>
                 </div>
               )}
-              <Button asChild variant="outline" className={`w-full mt-2 ${whiteCardButtonClass}`}>
+              <Button asChild variant="outline" className="w-full mt-2">
                 <Link href="/announcements">
                 <span>{t.viewAllAnnouncements}</span>
                 <ArrowRight className="w-4 h-4 ml-2" />
@@ -163,7 +161,7 @@ export function HomePage({ announcements = [] }: HomePageProps) {
                   title="AUS Upcoming Events"
                 />
               </div>
-              <Button asChild variant="outline" className={`w-full mt-2 ${whiteCardButtonClass}`}>
+              <Button asChild variant="outline" className="w-full mt-2">
                 <Link href="/involvement">
                 <span>{t.viewFullCalendar}</span>
                 <ArrowRight className="w-4 h-4 ml-2" />
@@ -184,7 +182,7 @@ export function HomePage({ announcements = [] }: HomePageProps) {
           </CardHeader>
           <CardContent>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              <Button variant="outline" className={`justify-start h-auto py-3 px-4 ${whiteCardButtonClass}`}>
+              <Button variant="outline" className="justify-start h-auto py-3 px-4">
                 <div className="flex items-center gap-3 w-full">
                   <GraduationCap className="w-5 h-5 text-red-600" />
                   <div className="text-left">
@@ -193,7 +191,7 @@ export function HomePage({ announcements = [] }: HomePageProps) {
                   </div>
                 </div>
               </Button>
-              <Button variant="outline" className={`justify-start h-auto py-3 px-4 ${whiteCardButtonClass}`}>
+              <Button variant="outline" className="justify-start h-auto py-3 px-4">
                 <div className="flex items-center gap-3 w-full">
                   <BookOpen className="w-5 h-5 text-blue-600" />
                   <div className="text-left">
@@ -202,7 +200,7 @@ export function HomePage({ announcements = [] }: HomePageProps) {
                   </div>
                 </div>
               </Button>
-              <Button variant="outline" className={`justify-start h-auto py-3 px-4 ${whiteCardButtonClass}`}>
+              <Button variant="outline" className="justify-start h-auto py-3 px-4">
                 <div className="flex items-center gap-3 w-full">
                   <FileText className="w-5 h-5 text-green-600" />
                   <div className="text-left">
@@ -211,7 +209,7 @@ export function HomePage({ announcements = [] }: HomePageProps) {
                   </div>
                 </div>
               </Button>
-              <Button variant="outline" className={`justify-start h-auto py-3 px-4 ${whiteCardButtonClass}`}>
+              <Button variant="outline" className="justify-start h-auto py-3 px-4">
                 <div className="flex items-center gap-3 w-full">
                   <Users className="w-5 h-5 text-purple-600" />
                   <div className="text-left">
@@ -220,7 +218,7 @@ export function HomePage({ announcements = [] }: HomePageProps) {
                   </div>
                 </div>
               </Button>
-              <Button variant="outline" className={`justify-start h-auto py-3 px-4 ${whiteCardButtonClass}`}>
+              <Button variant="outline" className="justify-start h-auto py-3 px-4">
                 <div className="flex items-center gap-3 w-full">
                   <Calendar className="w-5 h-5 text-orange-600" />
                   <div className="text-left">
@@ -229,7 +227,7 @@ export function HomePage({ announcements = [] }: HomePageProps) {
                   </div>
                 </div>
               </Button>
-              <Button variant="outline" className={`justify-start h-auto py-3 px-4 ${whiteCardButtonClass}`}>
+              <Button variant="outline" className="justify-start h-auto py-3 px-4">
                 <div className="flex items-center gap-3 w-full">
                   <MapPin className="w-5 h-5 text-red-600" />
                   <div className="text-left">
@@ -252,8 +250,8 @@ export function HomePage({ announcements = [] }: HomePageProps) {
               {t.welcomeDesc}
             </p>
             <div className="flex gap-3 flex-wrap">
-              <Button className={whiteCardButtonClass}>{t.learnMore}</Button>
-              <Button variant="outline" className={whiteCardButtonClass}>{t.getInvolved}</Button>
+              <Button>{t.learnMore}</Button>
+              <Button variant="outline">{t.getInvolved}</Button>
             </div>
           </CardContent>
         </Card>
