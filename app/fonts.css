@@ -1,0 +1,7 @@
+.font-site-title {
+  font-family: "Proxima Nova", Proxima, "Avenir Next", Avenir, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.font-site-subtitle {
+  font-family: var(--font-lora), "Lora", Georgia, "Times New Roman", serif;
+}

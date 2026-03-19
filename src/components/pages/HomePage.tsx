@@ -240,19 +240,16 @@ export function HomePage({ announcements = [] }: HomePageProps) {
           </CardContent>
         </Card>
 
-        {/* Important Notice */}
-        <Card className="bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800">
-          <CardHeader>
-            <CardTitle>{t.welcomeTitle}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="mb-4">
-              {t.welcomeDesc}
-            </p>
-            <div className="flex gap-3 flex-wrap">
-              <Button>{t.learnMore}</Button>
-              <Button variant="outline">{t.getInvolved}</Button>
-            </div>
+        {/* Welcome Image */}
+        <Card className="overflow-hidden">
+          <CardContent className="p-0">
+            <img
+              src="/images/welcome-aus.png"
+              alt={language === 'en' ? 'Welcome to AUS' : 'Bienvenue à l’AUS'}
+              className="w-full h-auto object-cover"
+              loading="lazy"
+              decoding="async"
+            />
           </CardContent>
         </Card>
 

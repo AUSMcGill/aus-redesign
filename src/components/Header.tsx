@@ -41,15 +41,15 @@ export function Header() {
             <ImageWithFallback
               src={language === 'fr' ? aefaLogo.src : ausLogo.src}
               alt={language === 'fr' ? 'AÉFA Logo' : 'AUS Logo'}
-              className="h-[42px] w-[42px] md:h-[52px] md:w-[52px] object-contain"
+              className="h-[36px] w-[36px] md:h-[44px] md:w-[44px] object-contain"
               loading="eager"
               decoding="async"
               fetchPriority="high"
             />
-            <div className="h-[42px] md:h-[52px] w-px bg-red-700 dark:bg-red-600"></div>
+            <div className="h-[36px] md:h-[44px] w-px bg-red-700 dark:bg-red-600"></div>
             <div>
-              <h1 className="text-3xl">{t.headerTitle}</h1>
-              <p className="text-red-600 dark:text-red-500 mt-1">{t.headerSubtitle}</p>
+              <h1 className="text-3xl font-site-title font-bold">{t.headerTitle}</h1>
+              <p className="text-red-600 dark:text-red-500 mt-1 font-site-subtitle font-semibold">{t.headerSubtitle}</p>
             </div>
           </Link>
           <div className="flex items-center gap-2">
