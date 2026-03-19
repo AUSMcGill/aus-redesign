@@ -14,6 +14,7 @@ import {
   DropdownMenuLabel,
 } from './ui/dropdown-menu';
 import ausLogo from '../assets/aus-logo-v2.png';
+import aefaLogo from '../assets/aefa-logo.png';
 import { translations } from '../lib/translations';
 import { useApp } from '../lib/AppContext';
 
@@ -38,14 +39,14 @@ export function Header() {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-4 hover:opacity-80 transition-opacity cursor-pointer">
             <ImageWithFallback
-              src={ausLogo.src}
-              alt="AUS Logo"
-              className="h-20 w-20 md:h-[100px] md:w-[100px] object-contain"
+              src={language === 'fr' ? aefaLogo.src : ausLogo.src}
+              alt={language === 'fr' ? 'AÉFA Logo' : 'AUS Logo'}
+              className="h-10 w-10 md:h-[50px] md:w-[50px] object-contain"
               loading="eager"
               decoding="async"
               fetchPriority="high"
             />
-            <div className="h-20 md:h-[100px] w-px bg-red-700 dark:bg-red-600"></div>
+            <div className="h-10 md:h-[50px] w-px bg-red-700 dark:bg-red-600"></div>
             <div>
               <h1 className="text-3xl">{t.headerTitle}</h1>
               <p className="text-red-600 dark:text-red-500 mt-1">{t.headerSubtitle}</p>
