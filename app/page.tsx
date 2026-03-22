@@ -160,14 +160,14 @@ export default function Page() {
               {loopedPartnerLogos.map((fileName, index) => (
                 <div
                   key={`${fileName}-${index}`}
-                  className="flex h-12 w-[136px] shrink-0 items-center justify-center md:w-[160px]"
+                  className="flex h-16 w-[176px] shrink-0 items-center justify-center md:h-[74px] md:w-[210px]"
                 >
                   <Image
                     src={`/dept-logos/${encodeURIComponent(fileName)}`}
                     alt={`${fileName.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ')} logo`}
-                    width={140}
-                    height={56}
-                    className="h-8 w-auto max-w-[120px] object-contain opacity-70 md:h-9 md:max-w-[132px]"
+                    width={188}
+                    height={74}
+                    className="h-11 w-auto max-w-[164px] object-contain opacity-80 md:h-[52px] md:max-w-[188px]"
                   />
                 </div>
               ))}
