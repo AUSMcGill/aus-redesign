@@ -16,7 +16,39 @@ const playfairDisplay = Playfair_Display({
   style: ['normal', 'italic'],
 });
 
-const partnerLogos = ['Logoipsum', 'LOCO', 'Logo-M', 'Logoipsum', 'Logois'];
+const partnerLogoFiles = [
+  '74fb5086bd0409c677b205f3b5a63c72.png',
+  'ASA NEW.png',
+  'CSA.png',
+  'CSUS.png',
+  'Capture d’écran 2026-03-22 à 18.34.54.png',
+  'Capture d’écran 2026-03-22 à 18.36.23.png',
+  'Capture d’écran 2026-03-22 à 18.36.37.png',
+  'Copy of clashsla2.jpg',
+  'DESA.jpg',
+  'EASSA.png',
+  'ESA.png',
+  'GSA.png',
+  'IDSSA.png',
+  'LAPSA NEW.png',
+  'LINGUA.png',
+  'MESS.jpg',
+  'MPSA_LOGO-CHOSEN.png',
+  'NEW MUGS.png',
+  'NEW RUSS.png',
+  'PSA Logo.png',
+  'PSSA_Transparent.png',
+  'RSUS.png',
+  'SACS logo.png',
+  'SSA-logo.png',
+  'SUMS.png',
+  'WIMESSA.jpg',
+  'ac7dbaf9fc953b9697b0360a91d2b813.png',
+  'cefdc9714af6a2cea93cd7f424a906bd.png',
+  'd40450ac28337d04f1b2a043a65304c6.png',
+  'e677090ada5af709007473b1fcb97dc9.png',
+  'ed90c07dca9b06eb0be7da93b3d49eaa.png',
+];
 
 export default function Page() {
   const { language } = useApp();
@@ -25,7 +57,7 @@ export default function Page() {
   const isInView = useInView(carouselRef, { amount: 0.25 });
   const prefersReducedMotion = useReducedMotion();
   const shouldAnimate = isInView && !prefersReducedMotion;
-  const loopedPartnerLogos = [...partnerLogos, ...partnerLogos];
+  const loopedPartnerLogos = [...partnerLogoFiles, ...partnerLogoFiles];
 
   const navItems = [
     { path: '/', label: t.navHome },
@@ -125,19 +157,18 @@ export default function Page() {
                   : { duration: 0 }
               }
             >
-              {loopedPartnerLogos.map((logo, index) => (
+              {loopedPartnerLogos.map((fileName, index) => (
                 <div
-                  key={`${logo}-${index}`}
-                  className="flex h-10 w-[128px] shrink-0 items-center justify-center gap-2 text-[11px] font-semibold uppercase text-gray-500 md:w-[142px]"
+                  key={`${fileName}-${index}`}
+                  className="flex h-12 w-[136px] shrink-0 items-center justify-center md:w-[160px]"
                 >
                   <Image
-                    src="/file.svg"
-                    alt={`${logo} placeholder logo`}
-                    width={18}
-                    height={18}
-                    className="size-[18px] opacity-60"
+                    src={`/dept-logos/${encodeURIComponent(fileName)}`}
+                    alt={`${fileName.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ')} logo`}
+                    width={140}
+                    height={56}
+                    className="h-8 w-auto max-w-[120px] object-contain opacity-70 md:h-9 md:max-w-[132px]"
                   />
-                  <span className="truncate">{logo}</span>
                 </div>
               ))}
             </motion.div>
