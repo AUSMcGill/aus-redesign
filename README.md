@@ -20,6 +20,17 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Resources Data Source
+
+The `/resources` page reads resource names and links from a live Google Sheets CSV.
+
+1. Copy `.env.example` to `.env.local`
+2. Set `RESOURCES_CSV_URL` to your published Google Sheets CSV URL
+
+Accepted URL formats:
+- Direct CSV export URL (`.../export?format=csv&gid=...`)
+- Standard sheet URL (`.../edit#gid=...`) which is auto-converted at runtime
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
