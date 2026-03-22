@@ -5,3 +5,7 @@
 .font-site-subtitle {
   font-family: var(--font-lora), "Lora", Georgia, "Times New Roman", serif;
 }
+
+.font-hedvig-serif {
+  font-family: var(--font-hedvig-serif), "Times New Roman", serif;
+}

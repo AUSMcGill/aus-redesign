@@ -3,18 +3,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRef } from 'react';
-import { Playfair_Display } from 'next/font/google';
 import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '../src/components/ui/button';
 import { translations } from '../src/lib/translations';
 import { useApp } from '../src/lib/AppContext';
-
-const playfairDisplay = Playfair_Display({
-  subsets: ['latin'],
-  weight: ['700'],
-  style: ['normal', 'italic'],
-});
 
 const partnerLogoFiles = [
   '74fb5086bd0409c677b205f3b5a63c72.png',
@@ -109,11 +102,11 @@ export default function Page() {
             className="object-cover object-center"
             sizes="(max-width: 768px) 100vw, 1200px"
           />
-          <div className="absolute inset-0 bg-black/35" />
+          <div className="absolute inset-0 bg-black/45" />
 
           <div className="absolute inset-x-4 top-[41.5%] -translate-y-1/2 text-center md:inset-x-10">
             <h1
-              className={`${playfairDisplay.className} text-balance text-[56px] font-bold italic leading-none text-white sm:text-6xl md:text-7xl lg:text-[98px]`}
+              className="font-hedvig-serif text-balance text-[56px] font-semibold leading-none text-white sm:text-6xl md:text-7xl lg:text-[98px]"
             >
               aus / aéfa
             </h1>
@@ -121,10 +114,10 @@ export default function Page() {
 
           <div className="absolute inset-x-4 bottom-6 flex flex-col gap-4 md:inset-x-8 md:bottom-9 md:flex-row md:items-end md:justify-between">
             <div className="max-w-3xl">
-              <h2 className={`${playfairDisplay.className} text-balance text-4xl font-bold leading-tight text-white sm:text-4xl md:text-[56px]`}>
+              <h2 className="font-hedvig-serif text-balance text-4xl font-semibold leading-tight text-white sm:text-4xl md:text-[56px]">
                 Arts Undergraduate Society
               </h2>
-              <p className="mt-2 max-w-[560px] text-pretty text-sm text-gray-200 md:text-lg md:leading-7">
+              <p className="font-hedvig-serif mt-2 max-w-[560px] text-pretty text-sm text-gray-200 md:text-[19px] md:leading-7">
                 Proudly representing B.A and B.A.&amp;B.Sc. Students across 32 departments since 1908
               </p>
             </div>
@@ -134,7 +127,7 @@ export default function Page() {
               className="h-10 w-full rounded-full bg-[#A30D21] px-4 text-sm text-white hover:bg-[#8F0B1D] md:h-11 md:min-w-[174px] md:w-auto md:px-5"
             >
               <Link href="/about" className="inline-flex items-center justify-center gap-2">
-                <span>Explore AUS services</span>
+                <span>Learn what we do</span>
                 <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-[#A30D21]">
                   <ArrowRight className="h-3.5 w-3.5" />
                 </span>
