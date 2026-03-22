@@ -18,7 +18,7 @@ export function Layout({ children }: LayoutProps) {
         <Header />
 
         {/* Main Content */}
-        <main className="container mx-auto px-4 py-8 md:py-12 flex-grow">
+        <main className="container mx-auto px-4 pt-[7.5rem] py-8 md:pt-[9rem] md:py-12 flex-grow">
           {children}
         </main>
 
