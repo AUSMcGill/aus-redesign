@@ -153,21 +153,21 @@ export default function Page() {
               animate={shouldAnimate ? { x: ['0%', '-50%'] } : { x: '0%' }}
               transition={
                 shouldAnimate
-                  ? { duration: 20, ease: 'linear', repeat: Infinity }
+                  ? { duration: 13.33, ease: 'linear', repeat: Infinity }
                   : { duration: 0 }
               }
             >
               {loopedPartnerLogos.map((fileName, index) => (
                 <div
                   key={`${fileName}-${index}`}
-                  className="flex h-20 w-[220px] shrink-0 items-center justify-center md:h-24 md:w-[260px]"
+                  className="flex h-[60px] w-[165px] shrink-0 items-center justify-center md:h-[72px] md:w-[195px]"
                 >
                   <Image
                     src={`/dept-logos/${encodeURIComponent(fileName)}`}
                     alt={`${fileName.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ')} logo`}
-                    width={260}
-                    height={96}
-                    className="h-full w-full object-contain p-2 opacity-90 md:p-3"
+                    width={195}
+                    height={72}
+                    className="h-full w-full object-contain p-2 opacity-90"
                   />
                 </div>
               ))}
